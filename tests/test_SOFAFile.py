@@ -1364,7 +1364,7 @@ def test_checkSOFARequiredAttributes():
     fd, path = tempfile.mkstemp()
     rootgrp = Dataset(path, 'w', format='NETCDF4')
     rootgrp.close()
-    raiseError('Missing required attribute: Conventions')
+    raiseError('Missing required attribute: APIName')
 
 
     # Assert all attributes

@@ -35,72 +35,18 @@
 #
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
-from enum import Enum
 from .SOFAError import SOFAError
+import inspect
 
 class SOFAUnits(object):
 
-
-    class UnitTypes(Enum):
+    class UnitTypes:
         Meter           = 0
         CubicMeter      = 1
         Hertz           = 2
         Samples         = 3
         SphericalUnits  = 4
         Kelvin          = 5
-
-
-    @classmethod
-    def getName(cls,unitType):
-        """
-        Get the name string for the given UnitType instance
-
-        :param unitType:    an instance of unitType
-        :return:            the name string
-        """
-
-        if unitType == cls.UnitTypes.Meter:             return 'metre'
-        elif unitType == cls.UnitTypes.CubicMeter:      return 'cubic metre'
-        elif unitType == cls.UnitTypes.Hertz:           return 'hertz'
-        elif unitType == cls.UnitTypes.Samples:         return 'samples'
-        elif unitType == cls.UnitTypes.SphericalUnits:  return 'degree, degree, metre'
-        elif unitType == cls.UnitTypes.Kelvin:          return 'kelvin'
-
-
-
-    @classmethod
-    def getType(cls,name):
-        """
-        Get the UnitType of a given type string
-
-        :param name:    the name of the unit being queried
-        :return:        an instance of UniType
-        :raises:        SOFAError if the name does not correspond with a valid Unit Type
-        """
-        typeMap = cls.getTypeMap()
-
-        try:
-            return typeMap[name.lower()]
-        except KeyError:
-            raise SOFAError(str('Unit name not known: ' + name))
-
-
-    @classmethod
-    def isValid(cls,name):
-        """
-        Answer if a given name string corresponds with a valid Unit Type
-
-        :param name:    the name of the unit being queried
-        :return:        a Boolean
-        """
-
-        typeMap = cls.getTypeMap()
-
-        if name.lower() in typeMap:
-            return True
-        else:
-            return False
-
 
     @classmethod
     def getTypeMap(cls):
@@ -154,66 +100,86 @@ class SOFAUnits(object):
             'degrees kelvin'            : cls.UnitTypes.Kelvin,
         }
 
+    @classmethod
+    def getType(cls,name):
+        """
+        Get the UnitType of a given type string
+
+        :param name:    the name of the unit being queried
+        :return:        an instance of UniType
+        :raises:        SOFAError if the name does not correspond with a valid Unit Type
+        """
+        typeMap = cls.getTypeMap()
+        try:
+            return typeMap[name.lower()]
+        except KeyError:
+            raise SOFAError(str('Unit name not known: ' + name))
+
 
     @classmethod
-    def isDistanceUnit(cls,unit):
+    def isValid(cls,name):
+        """
+        Answer if a given name string corresponds with a valid Unit Type
+
+        :param name:    the name of the unit being queried
+        :return:        a Boolean
+        """
+
+        typeMap = cls.getTypeMap()
+
+        if name.lower() in typeMap:
+            return True
+        else:
+            return False
+
+
+    @classmethod
+    def isDistanceUnit(cls,unitName):
         """
         Check if a given unit type is of Distance kind
 
-        :param unit:    a UnitType instance, or a unit name string
-        :return:        a Boolean
-        :raise:         SOFAError, if the name string does not correspond with a unit type
+        :param unitName:    a unit name string
+        :return:            a Boolean
+        :raise:             SOFAError, if the name string does not correspond with a unit type
         """
-        if isinstance(unit,cls.UnitTypes):
-            if unit == cls.UnitTypes.Meter:
+        try:
+            if cls.getType(unitName) == cls.UnitTypes.Meter:
                 return True
             else:
                 return False
-        else:
-            try:
-                if cls.getType(unit) == cls.UnitTypes.Meter:
-                    return True
-                else:
-                    return False
-            except SOFAError as e:
-                raise e
+        except SOFAError as e:
+            raise e
 
     @classmethod
-    def isFrequencyUnit(cls, unit):
+    def isFrequencyUnit(cls, unitName):
         """
         Check if a given unit type is of Frequency kind
 
-        :param unit:    a UnitType instance, or a unit name string
-        :return:        a Boolean
-        :raise:         SOFAError, if the name string does not correspond with a unit type
+        :param unitName:    a unit name string
+        :return:            a Boolean
+        :raise:             SOFAError, if the name string does not correspond with a unit type
         """
-        if isinstance(unit,cls.UnitTypes):
-            if unit == cls.UnitTypes.Hertz:
+        try:
+            if cls.getType(unitName) == cls.UnitTypes.Hertz:
                 return True
             else:
                 return False
-        else:
-            if cls.getType(unit) == cls.UnitTypes.Hertz:
-                return True
-            else:
-                return False
+        except SOFAError as e:
+            raise e
 
     @classmethod
-    def isTimeUnit(cls, unit):
+    def isTimeUnit(cls, unitName):
         """
         Check if a given unit type is of Time kind
 
-        :param unit:    a UnitType instance, or a unit name string
-        :return:        a Boolean
-        :raise:         SOFAError, if the name string does not correspond with a unit type
+        :param unitName:    a unit name string
+        :return:           a Boolean
+        :raise:             SOFAError, if the name string does not correspond with a unit type
         """
-        if isinstance(unit,cls.UnitTypes):
-            if unit == cls.UnitTypes.Samples:
+        try:
+            if cls.getType(unitName) == cls.UnitTypes.Samples:
                 return True
             else:
                 return False
-        else:
-            if cls.getType(unit) == cls.UnitTypes.Samples:
-                return True
-            else:
-                return False
+        except SOFAError as e:
+            raise e

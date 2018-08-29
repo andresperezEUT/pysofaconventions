@@ -39,16 +39,6 @@ import pytest
 from pysofa import *
 
 
-def test_getName():
-
-    assert SOFAUnits.getName(SOFAUnits.UnitTypes.Meter) == 'metre'
-    assert SOFAUnits.getName(SOFAUnits.UnitTypes.CubicMeter) == 'cubic metre'
-    assert SOFAUnits.getName(SOFAUnits.UnitTypes.Hertz) == 'hertz'
-    assert SOFAUnits.getName(SOFAUnits.UnitTypes.Samples) == 'samples'
-    assert SOFAUnits.getName(SOFAUnits.UnitTypes.SphericalUnits) == 'degree, degree, metre'
-    assert SOFAUnits.getName(SOFAUnits.UnitTypes.Kelvin) == 'kelvin'
-
-
 def test_getType():
 
     # Type not found
@@ -72,14 +62,6 @@ def test_isValid():
 
 def test_isDistanceUnit():
 
-    ## UnitTypes
-    # Not instance
-    assert not SOFAUnits.isDistanceUnit(SOFAUnits.UnitTypes.Kelvin)
-    assert not SOFAUnits.isDistanceUnit(SOFAUnits.UnitTypes.Hertz)
-    # Instance
-    assert SOFAUnits.isDistanceUnit(SOFAUnits.UnitTypes.Meter)
-
-    ## String types
     # Not instance
     assert not SOFAUnits.isDistanceUnit("kelvin")
     # Instance
@@ -94,14 +76,6 @@ def test_isDistanceUnit():
 
 def test_isFrequencyUnit():
 
-    ## UnitTypes
-    # Not instance
-    assert not SOFAUnits.isFrequencyUnit(SOFAUnits.UnitTypes.Kelvin)
-    assert not SOFAUnits.isFrequencyUnit(SOFAUnits.UnitTypes.Samples)
-    # Instance
-    assert SOFAUnits.isFrequencyUnit(SOFAUnits.UnitTypes.Hertz)
-
-    ## String types
     # Not instance
     assert not SOFAUnits.isFrequencyUnit("kelvin")
     # Instance
@@ -116,14 +90,6 @@ def test_isFrequencyUnit():
 
 def test_isTimeUnit():
 
-    ## UnitTypes
-    # Not instance
-    assert not SOFAUnits.isTimeUnit(SOFAUnits.UnitTypes.Kelvin)
-    assert not SOFAUnits.isTimeUnit(SOFAUnits.UnitTypes.Meter)
-    # Instance
-    assert SOFAUnits.isTimeUnit(SOFAUnits.UnitTypes.Samples)
-
-    ## String types
     # Not instance
     assert not SOFAUnits.isTimeUnit("kelvin")
     # Instance

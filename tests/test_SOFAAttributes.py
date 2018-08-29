@@ -2,7 +2,7 @@
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 #
-# Copyright (c) 2018, Eurecat / UPF
+# Copyright (c') 2018, Eurecat / UPF
 # All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
@@ -22,9 +22,9 @@
 # DISCLAIMED. IN NO EVENT SHALL <COPYRIGHT HOLDER> BE LIABLE FOR ANY
 # DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
 # (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
-# LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+# LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION') HOWEVER CAUSED AND
 # ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
-# (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+# (INCLUDING NEGLIGENCE OR OTHERWISE') ARISING IN ANY WAY OUT OF THE USE OF THIS
 # SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
@@ -40,158 +40,158 @@ from pysofa import *
 def test_isRequired() :
 
     # Required
-    assert SOFAAttributes.isRequired(SOFAAttributes.AttributeTypes.Conventions)
-    assert SOFAAttributes.isRequired(SOFAAttributes.AttributeTypes.Version)
-    assert SOFAAttributes.isRequired(SOFAAttributes.AttributeTypes.SOFAConventions)
-    assert SOFAAttributes.isRequired(SOFAAttributes.AttributeTypes.SOFAConventionsVersion)
-    assert SOFAAttributes.isRequired(SOFAAttributes.AttributeTypes.APIName)
-    assert SOFAAttributes.isRequired(SOFAAttributes.AttributeTypes.APIVersion)
-    assert SOFAAttributes.isRequired(SOFAAttributes.AttributeTypes.AuthorContact)
-    assert SOFAAttributes.isRequired(SOFAAttributes.AttributeTypes.Organization)
-    assert SOFAAttributes.isRequired(SOFAAttributes.AttributeTypes.License)
-    assert SOFAAttributes.isRequired(SOFAAttributes.AttributeTypes.DataType)
-    assert SOFAAttributes.isRequired(SOFAAttributes.AttributeTypes.RoomType)
-    assert SOFAAttributes.isRequired(SOFAAttributes.AttributeTypes.DateCreated)
-    assert SOFAAttributes.isRequired(SOFAAttributes.AttributeTypes.DateModified)
+    assert SOFAAttributes.isRequired('Conventions')
+    assert SOFAAttributes.isRequired('Version')
+    assert SOFAAttributes.isRequired('SOFAConventions')
+    assert SOFAAttributes.isRequired('SOFAConventionsVersion')
+    assert SOFAAttributes.isRequired('APIName')
+    assert SOFAAttributes.isRequired('APIVersion')
+    assert SOFAAttributes.isRequired('AuthorContact')
+    assert SOFAAttributes.isRequired('Organization')
+    assert SOFAAttributes.isRequired('License')
+    assert SOFAAttributes.isRequired('DataType')
+    assert SOFAAttributes.isRequired('RoomType')
+    assert SOFAAttributes.isRequired('DateCreated')
+    assert SOFAAttributes.isRequired('DateModified')
 
     # Not required
-    assert not SOFAAttributes.isRequired(SOFAAttributes.AttributeTypes.ApplicationName)
-    assert not SOFAAttributes.isRequired(SOFAAttributes.AttributeTypes.ApplicationVersion)
-    assert not SOFAAttributes.isRequired(SOFAAttributes.AttributeTypes.Comment)
-    assert not SOFAAttributes.isRequired(SOFAAttributes.AttributeTypes.History)
-    assert not SOFAAttributes.isRequired(SOFAAttributes.AttributeTypes.References)
-    assert not SOFAAttributes.isRequired(SOFAAttributes.AttributeTypes.Origin)
-    assert not SOFAAttributes.isRequired(SOFAAttributes.AttributeTypes.RoomShortName)
-    assert not SOFAAttributes.isRequired(SOFAAttributes.AttributeTypes.RoomDescription)
-    assert not SOFAAttributes.isRequired(SOFAAttributes.AttributeTypes.RoomLocation)
-    assert not SOFAAttributes.isRequired(SOFAAttributes.AttributeTypes.ListenerShortName)
-    assert not SOFAAttributes.isRequired(SOFAAttributes.AttributeTypes.ListenerDescription)
-    assert not SOFAAttributes.isRequired(SOFAAttributes.AttributeTypes.SourceShortName)
-    assert not SOFAAttributes.isRequired(SOFAAttributes.AttributeTypes.SourceDescription)
-    assert not SOFAAttributes.isRequired(SOFAAttributes.AttributeTypes.ReceiverShortName)
-    assert not SOFAAttributes.isRequired(SOFAAttributes.AttributeTypes.ReceiverDescription)
-    assert not SOFAAttributes.isRequired(SOFAAttributes.AttributeTypes.EmitterShortName)
-    assert not SOFAAttributes.isRequired(SOFAAttributes.AttributeTypes.EmitterDescription)
+    assert not SOFAAttributes.isRequired('ApplicationName')
+    assert not SOFAAttributes.isRequired('ApplicationVersion')
+    assert not SOFAAttributes.isRequired('Comment')
+    assert not SOFAAttributes.isRequired('History')
+    assert not SOFAAttributes.isRequired('References')
+    assert not SOFAAttributes.isRequired('Origin')
+    assert not SOFAAttributes.isRequired('RoomShortName')
+    assert not SOFAAttributes.isRequired('RoomDescription')
+    assert not SOFAAttributes.isRequired('RoomLocation')
+    assert not SOFAAttributes.isRequired('ListenerShortName')
+    assert not SOFAAttributes.isRequired('ListenerDescription')
+    assert not SOFAAttributes.isRequired('SourceShortName')
+    assert not SOFAAttributes.isRequired('SourceDescription')
+    assert not SOFAAttributes.isRequired('ReceiverShortName')
+    assert not SOFAAttributes.isRequired('ReceiverDescription')
+    assert not SOFAAttributes.isRequired('EmitterShortName')
+    assert not SOFAAttributes.isRequired('EmitterDescription')
 
 
 def test_isReadOnly():
     
     # Read-only
-    assert SOFAAttributes.isReadOnly(SOFAAttributes.AttributeTypes.Conventions)
-    assert SOFAAttributes.isReadOnly(SOFAAttributes.AttributeTypes.Version)
-    assert SOFAAttributes.isReadOnly(SOFAAttributes.AttributeTypes.SOFAConventions)
-    assert SOFAAttributes.isReadOnly(SOFAAttributes.AttributeTypes.SOFAConventionsVersion)
-    assert SOFAAttributes.isReadOnly(SOFAAttributes.AttributeTypes.APIName)
-    assert SOFAAttributes.isReadOnly(SOFAAttributes.AttributeTypes.APIVersion)
+    assert SOFAAttributes.isReadOnly('Conventions')
+    assert SOFAAttributes.isReadOnly('Version')
+    assert SOFAAttributes.isReadOnly('SOFAConventions')
+    assert SOFAAttributes.isReadOnly('SOFAConventionsVersion')
+    assert SOFAAttributes.isReadOnly('APIName')
+    assert SOFAAttributes.isReadOnly('APIVersion')
 
     # Not read-only
-    assert not SOFAAttributes.isReadOnly(SOFAAttributes.AttributeTypes.ApplicationName)
-    assert not SOFAAttributes.isReadOnly(SOFAAttributes.AttributeTypes.ApplicationVersion)
-    assert not SOFAAttributes.isReadOnly(SOFAAttributes.AttributeTypes.AuthorContact)
-    assert not SOFAAttributes.isReadOnly(SOFAAttributes.AttributeTypes.Organization)
-    assert not SOFAAttributes.isReadOnly(SOFAAttributes.AttributeTypes.License)
-    assert not SOFAAttributes.isReadOnly(SOFAAttributes.AttributeTypes.Comment)
-    assert not SOFAAttributes.isReadOnly(SOFAAttributes.AttributeTypes.History)
-    assert not SOFAAttributes.isReadOnly(SOFAAttributes.AttributeTypes.References)
-    assert not SOFAAttributes.isReadOnly(SOFAAttributes.AttributeTypes.DataType)
-    assert not SOFAAttributes.isReadOnly(SOFAAttributes.AttributeTypes.RoomType)
-    assert not SOFAAttributes.isReadOnly(SOFAAttributes.AttributeTypes.Origin)
-    assert not SOFAAttributes.isReadOnly(SOFAAttributes.AttributeTypes.DateCreated)
-    assert not SOFAAttributes.isReadOnly(SOFAAttributes.AttributeTypes.DateModified)
-    assert not SOFAAttributes.isReadOnly(SOFAAttributes.AttributeTypes.Title)
-    assert not SOFAAttributes.isReadOnly(SOFAAttributes.AttributeTypes.RoomShortName)
-    assert not SOFAAttributes.isReadOnly(SOFAAttributes.AttributeTypes.RoomDescription)
-    assert not SOFAAttributes.isReadOnly(SOFAAttributes.AttributeTypes.RoomLocation)
-    assert not SOFAAttributes.isReadOnly(SOFAAttributes.AttributeTypes.ListenerShortName)
-    assert not SOFAAttributes.isReadOnly(SOFAAttributes.AttributeTypes.ListenerDescription)
-    assert not SOFAAttributes.isReadOnly(SOFAAttributes.AttributeTypes.SourceShortName)
-    assert not SOFAAttributes.isReadOnly(SOFAAttributes.AttributeTypes.SourceDescription)
-    assert not SOFAAttributes.isReadOnly(SOFAAttributes.AttributeTypes.ReceiverShortName)
-    assert not SOFAAttributes.isReadOnly(SOFAAttributes.AttributeTypes.ReceiverDescription)
-    assert not SOFAAttributes.isReadOnly(SOFAAttributes.AttributeTypes.EmitterShortName)
-    assert not SOFAAttributes.isReadOnly(SOFAAttributes.AttributeTypes.EmitterDescription)
+    assert not SOFAAttributes.isReadOnly('ApplicationName')
+    assert not SOFAAttributes.isReadOnly('ApplicationVersion')
+    assert not SOFAAttributes.isReadOnly('AuthorContact')
+    assert not SOFAAttributes.isReadOnly('Organization')
+    assert not SOFAAttributes.isReadOnly('License')
+    assert not SOFAAttributes.isReadOnly('Comment')
+    assert not SOFAAttributes.isReadOnly('History')
+    assert not SOFAAttributes.isReadOnly('References')
+    assert not SOFAAttributes.isReadOnly('DataType')
+    assert not SOFAAttributes.isReadOnly('RoomType')
+    assert not SOFAAttributes.isReadOnly('Origin')
+    assert not SOFAAttributes.isReadOnly('DateCreated')
+    assert not SOFAAttributes.isReadOnly('DateModified')
+    assert not SOFAAttributes.isReadOnly('Title')
+    assert not SOFAAttributes.isReadOnly('RoomShortName')
+    assert not SOFAAttributes.isReadOnly('RoomDescription')
+    assert not SOFAAttributes.isReadOnly('RoomLocation')
+    assert not SOFAAttributes.isReadOnly('ListenerShortName')
+    assert not SOFAAttributes.isReadOnly('ListenerDescription')
+    assert not SOFAAttributes.isReadOnly('SourceShortName')
+    assert not SOFAAttributes.isReadOnly('SourceDescription')
+    assert not SOFAAttributes.isReadOnly('ReceiverShortName')
+    assert not SOFAAttributes.isReadOnly('ReceiverDescription')
+    assert not SOFAAttributes.isReadOnly('EmitterShortName')
+    assert not SOFAAttributes.isReadOnly('EmitterDescription')
 
 
 def test_hasDefaultValue():
 
     # Default value
-    assert SOFAAttributes.hasDefaultValue(SOFAAttributes.AttributeTypes.Conventions)
-    assert SOFAAttributes.hasDefaultValue(SOFAAttributes.AttributeTypes.Version)
-    assert SOFAAttributes.hasDefaultValue(SOFAAttributes.AttributeTypes.DataType)
-    assert SOFAAttributes.hasDefaultValue(SOFAAttributes.AttributeTypes.SOFAConventions)
-    assert SOFAAttributes.hasDefaultValue(SOFAAttributes.AttributeTypes.SOFAConventionsVersion)
-    assert SOFAAttributes.hasDefaultValue(SOFAAttributes.AttributeTypes.APIName)
-    assert SOFAAttributes.hasDefaultValue(SOFAAttributes.AttributeTypes.APIVersion)
-    assert SOFAAttributes.hasDefaultValue(SOFAAttributes.AttributeTypes.License)
-    assert SOFAAttributes.hasDefaultValue(SOFAAttributes.AttributeTypes.RoomType)
+    assert SOFAAttributes.hasDefaultValue('Conventions')
+    assert SOFAAttributes.hasDefaultValue('Version')
+    assert SOFAAttributes.hasDefaultValue('DataType')
+    assert SOFAAttributes.hasDefaultValue('SOFAConventions')
+    assert SOFAAttributes.hasDefaultValue('SOFAConventionsVersion')
+    assert SOFAAttributes.hasDefaultValue('APIName')
+    assert SOFAAttributes.hasDefaultValue('APIVersion')
+    assert SOFAAttributes.hasDefaultValue('License')
+    assert SOFAAttributes.hasDefaultValue('RoomType')
 
     # No default value
-    assert not SOFAAttributes.hasDefaultValue(SOFAAttributes.AttributeTypes.ApplicationName)
-    assert not SOFAAttributes.hasDefaultValue(SOFAAttributes.AttributeTypes.ApplicationVersion)
-    assert not SOFAAttributes.hasDefaultValue(SOFAAttributes.AttributeTypes.AuthorContact)
-    assert not SOFAAttributes.hasDefaultValue(SOFAAttributes.AttributeTypes.Organization)
-    assert not SOFAAttributes.hasDefaultValue(SOFAAttributes.AttributeTypes.Comment)
-    assert not SOFAAttributes.hasDefaultValue(SOFAAttributes.AttributeTypes.History)
-    assert not SOFAAttributes.hasDefaultValue(SOFAAttributes.AttributeTypes.References)
-    assert not SOFAAttributes.hasDefaultValue(SOFAAttributes.AttributeTypes.Origin)
-    assert not SOFAAttributes.hasDefaultValue(SOFAAttributes.AttributeTypes.DateCreated)
-    assert not SOFAAttributes.hasDefaultValue(SOFAAttributes.AttributeTypes.DateModified)
-    assert not SOFAAttributes.hasDefaultValue(SOFAAttributes.AttributeTypes.Title)
-    assert not SOFAAttributes.hasDefaultValue(SOFAAttributes.AttributeTypes.RoomShortName)
-    assert not SOFAAttributes.hasDefaultValue(SOFAAttributes.AttributeTypes.RoomDescription)
-    assert not SOFAAttributes.hasDefaultValue(SOFAAttributes.AttributeTypes.RoomLocation)
-    assert not SOFAAttributes.hasDefaultValue(SOFAAttributes.AttributeTypes.ListenerShortName)
-    assert not SOFAAttributes.hasDefaultValue(SOFAAttributes.AttributeTypes.ListenerDescription)
-    assert not SOFAAttributes.hasDefaultValue(SOFAAttributes.AttributeTypes.SourceShortName)
-    assert not SOFAAttributes.hasDefaultValue(SOFAAttributes.AttributeTypes.SourceDescription)
-    assert not SOFAAttributes.hasDefaultValue(SOFAAttributes.AttributeTypes.ReceiverShortName)
-    assert not SOFAAttributes.hasDefaultValue(SOFAAttributes.AttributeTypes.ReceiverDescription)
-    assert not SOFAAttributes.hasDefaultValue(SOFAAttributes.AttributeTypes.EmitterShortName)
-    assert not SOFAAttributes.hasDefaultValue(SOFAAttributes.AttributeTypes.EmitterDescription)
+    assert not SOFAAttributes.hasDefaultValue('ApplicationName')
+    assert not SOFAAttributes.hasDefaultValue('ApplicationVersion')
+    assert not SOFAAttributes.hasDefaultValue('AuthorContact')
+    assert not SOFAAttributes.hasDefaultValue('Organization')
+    assert not SOFAAttributes.hasDefaultValue('Comment')
+    assert not SOFAAttributes.hasDefaultValue('History')
+    assert not SOFAAttributes.hasDefaultValue('References')
+    assert not SOFAAttributes.hasDefaultValue('Origin')
+    assert not SOFAAttributes.hasDefaultValue('DateCreated')
+    assert not SOFAAttributes.hasDefaultValue('DateModified')
+    assert not SOFAAttributes.hasDefaultValue('Title')
+    assert not SOFAAttributes.hasDefaultValue('RoomShortName')
+    assert not SOFAAttributes.hasDefaultValue('RoomDescription')
+    assert not SOFAAttributes.hasDefaultValue('RoomLocation')
+    assert not SOFAAttributes.hasDefaultValue('ListenerShortName')
+    assert not SOFAAttributes.hasDefaultValue('ListenerDescription')
+    assert not SOFAAttributes.hasDefaultValue('SourceShortName')
+    assert not SOFAAttributes.hasDefaultValue('SourceDescription')
+    assert not SOFAAttributes.hasDefaultValue('ReceiverShortName')
+    assert not SOFAAttributes.hasDefaultValue('ReceiverDescription')
+    assert not SOFAAttributes.hasDefaultValue('EmitterShortName')
+    assert not SOFAAttributes.hasDefaultValue('EmitterDescription')
 
 
 def test_getDefaultAttributeValue():
 
     # Default value
-    assert SOFAAttributes.getDefaultAttributeValue(SOFAAttributes.AttributeTypes.Conventions)               \
+    assert SOFAAttributes.getDefaultAttributeValue('Conventions')               \
            == 'SOFA'
-    assert SOFAAttributes.getDefaultAttributeValue(SOFAAttributes.AttributeTypes.Version)                   \
+    assert SOFAAttributes.getDefaultAttributeValue('Version')                   \
            == SOFAAPI.getSpecificationsVersion()
-    assert SOFAAttributes.getDefaultAttributeValue(SOFAAttributes.AttributeTypes.DataType)                  \
+    assert SOFAAttributes.getDefaultAttributeValue('DataType')                  \
            == 'FIR'
-    assert SOFAAttributes.getDefaultAttributeValue(SOFAAttributes.AttributeTypes.SOFAConventions)           \
+    assert SOFAAttributes.getDefaultAttributeValue('SOFAConventions')           \
            == 'SimpleFreeFieldHRIR'
-    assert SOFAAttributes.getDefaultAttributeValue(SOFAAttributes.AttributeTypes.SOFAConventionsVersion)    \
+    assert SOFAAttributes.getDefaultAttributeValue('SOFAConventionsVersion')    \
            == ''
-    assert SOFAAttributes.getDefaultAttributeValue(SOFAAttributes.AttributeTypes.APIName)                   \
+    assert SOFAAttributes.getDefaultAttributeValue('APIName')                   \
            == SOFAAPI.getAPIName()
-    assert SOFAAttributes.getDefaultAttributeValue(SOFAAttributes.AttributeTypes.APIVersion)                \
+    assert SOFAAttributes.getDefaultAttributeValue('APIVersion')                \
            == SOFAAPI.getAPIVersion()
-    assert SOFAAttributes.getDefaultAttributeValue(SOFAAttributes.AttributeTypes.License)                   \
+    assert SOFAAttributes.getDefaultAttributeValue('License')                   \
            == 'No license provided, ask the author for permission.'
-    assert SOFAAttributes.getDefaultAttributeValue(SOFAAttributes.AttributeTypes.RoomType)                  \
+    assert SOFAAttributes.getDefaultAttributeValue('RoomType')                  \
            == 'free field'
 
     # No default value
-    assert SOFAAttributes.getDefaultAttributeValue(SOFAAttributes.AttributeTypes.ApplicationName)       == ""
-    assert SOFAAttributes.getDefaultAttributeValue(SOFAAttributes.AttributeTypes.ApplicationVersion)    == ""
-    assert SOFAAttributes.getDefaultAttributeValue(SOFAAttributes.AttributeTypes.AuthorContact)         == ""
-    assert SOFAAttributes.getDefaultAttributeValue(SOFAAttributes.AttributeTypes.Organization)          == ""
-    assert SOFAAttributes.getDefaultAttributeValue(SOFAAttributes.AttributeTypes.Comment)               == ""
-    assert SOFAAttributes.getDefaultAttributeValue(SOFAAttributes.AttributeTypes.History)               == ""
-    assert SOFAAttributes.getDefaultAttributeValue(SOFAAttributes.AttributeTypes.References)            == ""
-    assert SOFAAttributes.getDefaultAttributeValue(SOFAAttributes.AttributeTypes.Origin)                == ""
-    assert SOFAAttributes.getDefaultAttributeValue(SOFAAttributes.AttributeTypes.DateCreated)           == ""
-    assert SOFAAttributes.getDefaultAttributeValue(SOFAAttributes.AttributeTypes.DateModified)          == ""
-    assert SOFAAttributes.getDefaultAttributeValue(SOFAAttributes.AttributeTypes.Title)                 == ""
-    assert SOFAAttributes.getDefaultAttributeValue(SOFAAttributes.AttributeTypes.RoomShortName)         == ""
-    assert SOFAAttributes.getDefaultAttributeValue(SOFAAttributes.AttributeTypes.RoomDescription)       == ""
-    assert SOFAAttributes.getDefaultAttributeValue(SOFAAttributes.AttributeTypes.RoomLocation)          == ""
-    assert SOFAAttributes.getDefaultAttributeValue(SOFAAttributes.AttributeTypes.ListenerShortName)     == ""
-    assert SOFAAttributes.getDefaultAttributeValue(SOFAAttributes.AttributeTypes.ListenerDescription)   == ""
-    assert SOFAAttributes.getDefaultAttributeValue(SOFAAttributes.AttributeTypes.SourceShortName)       == ""
-    assert SOFAAttributes.getDefaultAttributeValue(SOFAAttributes.AttributeTypes.SourceDescription)     == ""
-    assert SOFAAttributes.getDefaultAttributeValue(SOFAAttributes.AttributeTypes.ReceiverShortName)     == ""
-    assert SOFAAttributes.getDefaultAttributeValue(SOFAAttributes.AttributeTypes.ReceiverDescription)   == ""
-    assert SOFAAttributes.getDefaultAttributeValue(SOFAAttributes.AttributeTypes.EmitterShortName)      == ""
-    assert SOFAAttributes.getDefaultAttributeValue(SOFAAttributes.AttributeTypes.EmitterDescription)    == ""
+    assert SOFAAttributes.getDefaultAttributeValue('ApplicationName')       == ""
+    assert SOFAAttributes.getDefaultAttributeValue('ApplicationVersion')    == ""
+    assert SOFAAttributes.getDefaultAttributeValue('AuthorContact')         == ""
+    assert SOFAAttributes.getDefaultAttributeValue('Organization')          == ""
+    assert SOFAAttributes.getDefaultAttributeValue('Comment')               == ""
+    assert SOFAAttributes.getDefaultAttributeValue('History')               == ""
+    assert SOFAAttributes.getDefaultAttributeValue('References')            == ""
+    assert SOFAAttributes.getDefaultAttributeValue('Origin')                == ""
+    assert SOFAAttributes.getDefaultAttributeValue('DateCreated')           == ""
+    assert SOFAAttributes.getDefaultAttributeValue('DateModified')          == ""
+    assert SOFAAttributes.getDefaultAttributeValue('Title')                 == ""
+    assert SOFAAttributes.getDefaultAttributeValue('RoomShortName')         == ""
+    assert SOFAAttributes.getDefaultAttributeValue('RoomDescription')       == ""
+    assert SOFAAttributes.getDefaultAttributeValue('RoomLocation')          == ""
+    assert SOFAAttributes.getDefaultAttributeValue('ListenerShortName')     == ""
+    assert SOFAAttributes.getDefaultAttributeValue('ListenerDescription')   == ""
+    assert SOFAAttributes.getDefaultAttributeValue('SourceShortName')       == ""
+    assert SOFAAttributes.getDefaultAttributeValue('SourceDescription')     == ""
+    assert SOFAAttributes.getDefaultAttributeValue('ReceiverShortName')     == ""
+    assert SOFAAttributes.getDefaultAttributeValue('ReceiverDescription')   == ""
+    assert SOFAAttributes.getDefaultAttributeValue('EmitterShortName')      == ""
+    assert SOFAAttributes.getDefaultAttributeValue('EmitterDescription')    == ""

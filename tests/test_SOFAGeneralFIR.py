@@ -65,7 +65,7 @@ def test_isValid():
     # File not valid
     rootgrp = Dataset(path, 'w', format='NETCDF4')
     rootgrp.close()
-    raiseWarning('Missing required attribute: Conventions')
+    raiseWarning('Missing required attribute: APIName')
     os.remove(path)
 
     # SOFA File valid

@@ -379,23 +379,6 @@ class SOFAFile(object):
         return self.getPositionVariableInfo('SourceView')
 
 
-            # def get
-
-        # def getListenerPosition(self):
-
-        #
-        # ###### VARIABLES
-        #
-        # def getListenerPosition(self):return
-        # def getListenerUp(self):return
-        # def getListenerView(self):return
-        #
-        # def getReceiverPosition(self):return
-        # def getReceiverUp(self):return
-        # def getReceiverView(self):return
-        # def hasReceiverUp(self):return
-        # def hasReceiverView(self):return
-
     def getReceiverPositionInfo(self):
         """
         Get Units and Coordinates of ReceiverPosition
@@ -569,7 +552,6 @@ class SOFAFile(object):
         """
         return self.getVariableAttributeValue('Data.IR', 'Normalization')
 
-    ################# PRINT STUFF
 
     def printSOFAGlobalAttributes(self):
         """
@@ -619,10 +601,10 @@ class SOFAFile(object):
         :return:    True if all required atributes exist
         :raises:    SOFAError if at least one required attribute is missing
         """
-        for attrType in list(SOFAAttributes.AttributeTypes):
-            if SOFAAttributes.isRequired(attrType):
-                if attrType.name not in self.getGlobalAttributesAsDict():
-                    raise SOFAError(str('Missing required attribute: '+attrType.name))
+        for attrName in SOFAAttributes.getAttributeNames():
+            if SOFAAttributes.isRequired(attrName):
+                if attrName not in self.getGlobalAttributesAsDict():
+                    raise SOFAError(str('Missing required attribute: '+attrName))
 
         return True
 
