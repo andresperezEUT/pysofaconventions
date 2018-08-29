@@ -32,10 +32,11 @@ ehthumbs.db
 Icon
 Thumbs.db
 .tmtags
-.idea
+.idea/*
 tags
 vendor.tags
 tmtagsHistory
 *.sublime-project
 *.sublime-workspace
 .bundle
+.cache
