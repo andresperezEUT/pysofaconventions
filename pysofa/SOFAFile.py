@@ -576,15 +576,15 @@ class SOFAFile(object):
         Print a list of the global attributes with their values
         """
         for attr in self.getGlobalAttributesAsDict():
-            print'- ' + attr
-            print '\t' + self.getGlobalAttributeValue(attr)
+            print('- ' + attr)
+            print('\t' + self.getGlobalAttributeValue(attr))
 
     def printSOFADimensions(self):
         """
         Print a list of the file dimensions
         """
         for dim in self.getDimensionsAsDict():
-            print'- ' + self.getSOFADimensionStrings(dim) + ' : ' + str(self.getDimensionSize(dim))
+            print('- ' + self.getSOFADimensionStrings(dim) + ' : ' + str(self.getDimensionSize(dim)))
 
 
     def getSOFADimensionStrings(self,dim):
@@ -606,7 +606,7 @@ class SOFAFile(object):
         Print the file variables and their dimensions
         """
         for var in self.getVariablesAsDict():
-            print "- " + var + " = " + str(self.getVariableShape(var))
+            print("- " + var + " = " + str(self.getVariableShape(var)))
 
 
     ##### check stuff
