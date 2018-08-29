@@ -41,6 +41,7 @@ import tempfile
 from netCDF4 import Dataset
 import numpy as np
 from pysofa import *
+import six  # for iteritems 3.X compat
 
 def test_close():
 
@@ -141,7 +142,7 @@ def test_getDimensionsAsDict():
     sofaNcFile = sofafile.ncfile
 
     # Check that the returned dict keys, and also the name and size of the dimensions match
-    for i, (key, value) in enumerate(sofaNcFile.getDimensionsAsDict().iteritems()):
+    for i, (key, value) in enumerate(six.iteritems(sofaNcFile.getDimensionsAsDict())):
         k, v = targetDict.items()[i]
         assert key == k
         assert value.name == v.name
@@ -227,7 +228,7 @@ def test_getVariablesAsDict():
     sofaNcFile = sofafile.ncfile
 
     # Compare independently, one by one, all items in the dict
-    for i, (key, value) in enumerate(variableDict.iteritems()):
+    for i, (key, value) in enumerate(six.iteritems(variableDict)):
         k, v = sofaNcFile.getVariablesAsDict().items()[i]
         assert key == k
         assert value.__dict__ == v.__dict__

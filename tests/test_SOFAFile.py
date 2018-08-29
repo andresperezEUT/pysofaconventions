@@ -43,6 +43,7 @@ import time
 from pysofa import *
 import sys
 import numpy as np
+import six  # for iteritems 3.X compat
 
 
 def test_isValid():
@@ -291,8 +292,9 @@ def test_getDimensionsAsDict():
         'B': dimB
     }
     sofafile = SOFAFile(path, 'r')
+
     # Check that the returned dict keys, and also the name and size of the dimensions match
-    for i, (key, value) in enumerate(sofafile.getDimensionsAsDict().iteritems()):
+    for i, (key, value) in enumerate(six.iteritems(sofafile.getDimensionsAsDict())):
         k, v = targetDict.items()[i]
         assert key == k
         assert value.name == v.name
@@ -374,7 +376,7 @@ def test_getVariablesAsDict():
 
     sofafile = SOFAFile(path, 'r')
     # Compare independently, one by one, all items in the dict
-    for i, (key, value) in enumerate(variableDict.iteritems()):
+    for i, (key, value) in enumerate(six.iteritems(variableDict)):
         k, v = sofafile.getVariablesAsDict().items()[i]
         assert key == k
         assert value.__dict__ == v.__dict__
@@ -429,7 +431,7 @@ def test_getVariableShape():
 
     # Variable exists
     rootgrp = Dataset(path, 'a')
-    for name,value in dimensions.iteritems():
+    for name,value in six.iteritems(dimensions):
         rootgrp.createDimension(name, value)
     var = rootgrp.createVariable(variableName, 'f8', tuple(dimensions.keys()))
     rootgrp.close()
@@ -462,7 +464,7 @@ def test_getVariableDimensionality():
 
     # Variable exists
     rootgrp = Dataset(path, 'a')
-    for name,value in dimensions.iteritems():
+    for name,value in six.iteritems(dimensions):
         rootgrp.createDimension(name, value)
     var = rootgrp.createVariable(variableName, 'f8', tuple(dimensions.keys()))
     rootgrp.close()
