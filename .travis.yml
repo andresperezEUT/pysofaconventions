@@ -36,6 +36,7 @@ before_install:
     - pip install pytest-faulthandler
     - pip install pytest-cov
     - pip install numpydoc
+    - pip install netCDF4
 
 install:
 #    - pip install -e .[tests]
