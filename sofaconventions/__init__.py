@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-"""Top-level module for pysofa"""
+"""Top-level module for sofaconventions"""
 
 
 from .SOFAFile import SOFAFile

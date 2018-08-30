@@ -35,10 +35,10 @@
 #
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
-from pysofa import *
+from sofaconventions import *
 
 def test_getAPIName():
-    assert SOFAAPI.getAPIName() == 'pysofa'
+    assert SOFAAPI.getAPIName() == 'sofaconventions'
 
 def test_getAPIVersion():
 

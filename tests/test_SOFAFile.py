@@ -40,7 +40,7 @@ import os
 import tempfile
 from netCDF4 import Dataset
 import time
-from pysofa import *
+from sofaconventions import *
 import sys
 import numpy as np
 from collections import OrderedDict
@@ -70,7 +70,7 @@ def test_isValid():
     rootgrp.Version = '1.0'
     rootgrp.SOFAConventions = 'AmbisonicsDRIR'
     rootgrp.SOFAConventionsVersion = '0.1'
-    rootgrp.APIName = 'pysofa'
+    rootgrp.APIName = 'sofaconventions'
     rootgrp.APIVersion = '0.1'
     rootgrp.APIVersion = '0.1'
     rootgrp.AuthorContact = 'andres.perez@eurecat.org'
@@ -1379,7 +1379,7 @@ def test_checkSOFARequiredAttributes():
     rootgrp.Version = '1.0'
     rootgrp.SOFAConventions = 'AmbisonicsDRIR'
     rootgrp.SOFAConventionsVersion = '0.1'
-    rootgrp.APIName = 'pysofa'
+    rootgrp.APIName = 'sofaconventions'
     rootgrp.APIVersion = '0.1'
     rootgrp.APIVersion = '0.1'
     rootgrp.AuthorContact = 'andres.perez@eurecat.org'

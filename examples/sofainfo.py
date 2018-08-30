@@ -11,7 +11,7 @@
 #
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
-from pysofa import *
+from sofaconventions import *
 
 def printLine():
     print("-----------------------------------------------------------------------\n")

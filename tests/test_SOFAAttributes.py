@@ -35,7 +35,7 @@
 #
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
-from pysofa import *
+from sofaconventions import *
 
 def test_isRequired() :
 

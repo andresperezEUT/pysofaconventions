@@ -29,27 +29,30 @@
 #
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 #
-#   @file   SOFAMultiSpeakerBRIR.py
+#   @file   SOFASimpleFreeFieldHRIR.py
 #   @author Andrés Pérez-López
 #   @date   29/08/2018
 #
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
-from pysofa import SOFAFile, SOFAWarning
+from sofaconventions import SOFAFile, SOFAWarning
 import warnings
 
-class SOFAMultiSpeakerBRIR(SOFAFile):
+class SOFASimpleFreeFieldHRIR(SOFAFile):
 
-    conventionVersionMajor = 0
-    conventionVersionMinor = 3
+    conventionVersionMajor = 1
+    conventionVersionMinor = 0
 
     def isValid(self):
         """
-        Check for convention consistency
+        Check for GeneralFIR convention consistency
         It ensures general file consistency, and also specifics for this convention.
-        - 'DataType' == 'FIRE'
-        - 'SOFAConventions' == 'MultiSpeakerBRIR'
+        - 'DataType' == 'FIR'
+        - 'SOFAConventions' == 'SimpleFreeFieldHRIR'
+        - 'RoomType' == 'free field'
+        - Mandatory attribute 'ListenerShortName'
         - Mandatory attribute 'DatabaseName'
+        - E == 1
 
         :return:    Boolean
         :raises:    SOFAWarning with error description, in case
@@ -63,17 +66,30 @@ class SOFAMultiSpeakerBRIR(SOFAFile):
         # Ensure specifics of this convention
 
         ## Attributes
-        if not self.isFIREDataType():
-            warnings.warn('DataType is not FIRE', SOFAWarning)
+        if not self.isFIRDataType():
+            warnings.warn('DataType is not FIR', SOFAWarning)
             return False
 
-        if not self.getGlobalAttributeValue('SOFAConventions') == 'MultiSpeakerBRIR':
-            warnings.warn('SOFAConventions is not MultiSpeakerBRIR', SOFAWarning)
+        if not self.getGlobalAttributeValue('SOFAConventions') == 'SimpleFreeFieldHRIR':
+            warnings.warn('SOFAConventions is not SimpleFreeFieldHRIR', SOFAWarning)
+            return False
+
+        if not self.getGlobalAttributeValue('RoomType') == 'free field':
+            warnings.warn('RoomType is not "free field"', SOFAWarning)
+            return False
+
+        if not self.hasGlobalAttribute('ListenerShortName'):
+            warnings.warn('Missing required Global Attribute "ListenerShortName"', SOFAWarning)
             return False
 
         if not self.hasGlobalAttribute('DatabaseName'):
             warnings.warn('Missing required Global Attribute "DatabaseName"', SOFAWarning)
             return False
 
+        ## Dimensions
+        if not self.getDimensionSize('E') == 1:
+            warnings.warn('Number of emitters (E) should be 1, got '
+                          +str(self.getDimensionSize('E')), SOFAWarning)
+            return False
 
         return True

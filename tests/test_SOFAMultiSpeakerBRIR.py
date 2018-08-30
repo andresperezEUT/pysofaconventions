@@ -40,7 +40,7 @@ import os
 import tempfile
 import time
 from netCDF4 import Dataset
-from pysofa import *
+from sofaconventions import *
 
 
 def test_getConventionVersion():
@@ -75,7 +75,7 @@ def test_isValid():
     rootgrp.Version = '1.0'
     rootgrp.SOFAConventions = 'GeneralFIR'
     rootgrp.SOFAConventionsVersion = '0.1'
-    rootgrp.APIName = 'pysofa'
+    rootgrp.APIName = 'sofaconventions'
     rootgrp.APIVersion = '0.1'
     rootgrp.APIVersion = '0.1'
     rootgrp.AuthorContact = 'andres.perez@eurecat.org'

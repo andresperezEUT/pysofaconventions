@@ -29,36 +29,30 @@
 #
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 #
-#   @file   SOFASimpleHeadphoneIR.py
+#   @file   SOFASingleRoom.py
 #   @author Andrés Pérez-López
 #   @date   29/08/2018
 #
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
-from pysofa import SOFAFile, SOFAWarning
+from sofaconventions import SOFAFile, SOFAWarning
 import warnings
 
-class SOFASimpleHeadphoneIR(SOFAFile):
+class SOFASingleRoomDRIR(SOFAFile):
 
     conventionVersionMajor = 0
-    conventionVersionMinor = 2
+    conventionVersionMinor = 3
 
     def isValid(self):
         """
         Check for convention consistency
         It ensures general file consistency, and also specifics for this convention.
         - 'DataType' == 'FIR'
-        - 'SOFAConventions' == 'SimpleHeadphoneIR'
-        - 'RoomType' == 'free field'
-        - Mandatory attribute 'ListenerShortName'
-        - Mandatory attribute 'ListenerDescription'
-        - Mandatory attribute 'SourceDescription'
-        - Mandatory attribute 'EmitterDescription'
-        - Mandatory attribute 'DatabaseName'
-        - Mandatory attribute 'SourceModel'
-        - Mandatory attribute 'SourceManufacturer'
-        - Mandatory attribute 'SourceURI'
-        - E == R
+        - 'SOFAConventions' == 'SingleRoomDRIR'
+        - 'RoomType' == 'reverberant'
+        - Mandatory attribute 'RoomDescription'
+        - ListenerUp and ListenerView are mandatory
+        - E == 1
 
         :return:    Boolean
         :raises:    SOFAWarning with error description, in case
@@ -76,52 +70,30 @@ class SOFASimpleHeadphoneIR(SOFAFile):
             warnings.warn('DataType is not FIR', SOFAWarning)
             return False
 
-        if not self.getGlobalAttributeValue('SOFAConventions') == 'SimpleHeadphoneIR':
-            warnings.warn('SOFAConventions is not SimpleHeadphoneIR', SOFAWarning)
+        if not self.getGlobalAttributeValue('SOFAConventions') == 'SingleRoomDRIR':
+            warnings.warn('SOFAConventions is not SingleRoomDRIR', SOFAWarning)
             return False
 
-        if not self.getGlobalAttributeValue('RoomType') == 'free field':
-            warnings.warn('RoomType is not "free field"', SOFAWarning)
+        if not self.getGlobalAttributeValue('RoomType') == 'reverberant':
+            warnings.warn('RoomType is not "reverberant, got: "'
+                          +self.getGlobalAttributeValue('RoomType'), SOFAWarning)
             return False
 
-        if not self.hasGlobalAttribute('ListenerShortName'):
-            warnings.warn('Missing required Global Attribute "ListenerShortName"', SOFAWarning)
+        if not self.hasGlobalAttribute('RoomDescription'):
+            warnings.warn('Missing required Global Attribute "RoomDescription"', SOFAWarning)
             return False
 
-        if not self.hasGlobalAttribute('ListenerDescription'):
-            warnings.warn('Missing required Global Attribute "ListenerDescription"', SOFAWarning)
+
+        ##  Variables
+        if not self.hasListenerUp() or not self.hasListenerView():
+            warnings.warn('Mandatory Variables ListenerUp and ListenerView not found', SOFAWarning)
             return False
 
-        if not self.hasGlobalAttribute('SourceDescription'):
-            warnings.warn('Missing required Global Attribute "SourceDescription"', SOFAWarning)
-            return False
-
-        if not self.hasGlobalAttribute('EmitterDescription'):
-            warnings.warn('Missing required Global Attribute "EmitterDescription"', SOFAWarning)
-            return False
-
-        if not self.hasGlobalAttribute('DatabaseName'):
-            warnings.warn('Missing required Global Attribute "DatabaseName"', SOFAWarning)
-            return False
-
-        if not self.hasGlobalAttribute('SourceModel'):
-            warnings.warn('Missing required Global Attribute "SourceModel"', SOFAWarning)
-            return False
-
-        if not self.hasGlobalAttribute('SourceManufacturer'):
-            warnings.warn('Missing required Global Attribute "SourceManufacturer"', SOFAWarning)
-            return False
-
-        if not self.hasGlobalAttribute('SourceURI'):
-            warnings.warn('Missing required Global Attribute "SourceURI"', SOFAWarning)
-            return False
 
         ## Dimensions
-        if not self.getDimensionSize('E') == self.getDimensionSize('R'):
-            warnings.warn('Number of emitters (E) and number of receivers (R) should match, got  '
-                          +str(self.getDimensionSize('E')) + ","
-                          +str(self.getDimensionSize('R')), SOFAWarning)
+        if not self.getDimensionSize('E') == 1:
+            warnings.warn('Number of emitters (E) should be 1, got '
+                          +str(self.getDimensionSize('E')), SOFAWarning)
             return False
-
 
         return True

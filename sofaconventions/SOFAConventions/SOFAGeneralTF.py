@@ -29,19 +29,45 @@
 #
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 #
-#   @file   SOFAVersion.py
+#   @file   SOFAGeneralTF.py
 #   @author Andrés Pérez-López
 #   @date   29/08/2018
 #
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
-class SOFAVersion:
+from sofaconventions import SOFAFile, SOFAWarning
+import warnings
 
-    # Version of pysofa
-    SOFAVersionMajor = 0
-    SOFAVersionMinor = 1
-    SOFAVersionRelease = 0
+class SOFAGeneralTF(SOFAFile):
 
-    # Version of SOFA specs
-    SOFASpecificationsMajor = 1
-    SOFASpecificationsMinor = 0
+    conventionVersionMajor = 1
+    conventionVersionMinor = 0
+
+    def isValid(self):
+        """
+        Check for convention consistency
+        It ensures general file consistency, and also specifics for this convention.
+        - 'DataType' == 'TF'
+        - 'SOFAConventions' == 'GeneralTF'
+
+        :return:    Boolean
+        :raises:    SOFAWarning with error description, in case
+        """
+
+        # Check general file validity
+        if not SOFAFile.isValid(self):
+            return False
+
+
+        # Ensure specifics of this convention
+
+        ## Attributes
+        if not self.isTFDataType():
+            warnings.warn('DataType is not TF', SOFAWarning)
+            return False
+
+        if not self.getGlobalAttributeValue('SOFAConventions') == 'GeneralTF':
+            warnings.warn('SOFAConventions is not GeneralTF', SOFAWarning)
+            return False
+
+        return True

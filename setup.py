@@ -1,21 +1,21 @@
 from setuptools import setup, find_packages
-import pysofa.SOFAAPI
+import sofaconventions.SOFAAPI
 
 
 setup(
-    name='pysofa',
-    version=pysofa.SOFAAPI.getAPIVersion(),
-    description='pysofa: python implementation of the SOFA conventions',
+    name='sofaconventions',
+    version=sofaconventions.SOFAAPI.getAPIVersion(),
+    description='sofaconventions: python implementation of the SOFA Convention',
     author='Andres Perez-Lopez',
     author_email='andres.perez@upf.edu',
-    url='https://andresperezlopez.github.io/pysofa/',
-    packages=['pysofa'],
-    long_description='pysofa: python implementation of the SOFA conventions',
+    url='https://andresperezlopez.github.io/sofaconventions/',
+    packages=['sofaconventions'],
+    long_description='sofaconventions: python implementation of the Spatially Oriented Format for Acoustics Convention',
     keywords='SOFA HRTF binaural Ambisonics',
     project_urls={
-        'Project page': 'https://andresperezlopez.github.io/pysofa/',
-        'Documentation': 'https://pysofa.readthedocs.io/',
-        'Source': 'https://github.com/andresperezlopez/pysofa',
+        'Project page': 'https://andresperezlopez.github.io/sofaconventions/',
+        'Documentation': 'https://sofaconventions.readthedocs.io/',
+        'Source': 'https://github.com/andresperezlopez/sofaconventions',
     },
     license='BSD-3-Clause',
     classifiers=[

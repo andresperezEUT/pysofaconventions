@@ -39,7 +39,7 @@ import pytest
 import os
 import tempfile
 from netCDF4 import Dataset
-from pysofa import *
+from sofaconventions import *
 
 
 def test_checkOptionalVariables():

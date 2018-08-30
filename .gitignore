@@ -45,4 +45,4 @@ tmtagsHistory
 #######
 build/*
 dist/*
-pysofa.egg-info/*
+sofaconventions.egg-info/*

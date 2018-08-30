@@ -29,30 +29,27 @@
 #
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 #
-#   @file   SOFAAmbisonicsDRIR.py
+#   @file   SOFAMultiSpeakerBRIR.py
 #   @author Andrés Pérez-López
 #   @date   29/08/2018
 #
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
-from pysofa import SOFAFile, SOFAWarning
+from sofaconventions import SOFAFile, SOFAWarning
 import warnings
 
-class SOFAAmbisonicsDRIR(SOFAFile):
+class SOFAMultiSpeakerBRIR(SOFAFile):
 
     conventionVersionMajor = 0
-    conventionVersionMinor = 1
+    conventionVersionMinor = 3
 
     def isValid(self):
         """
         Check for convention consistency
         It ensures general file consistency, and also specifics for this convention.
         - 'DataType' == 'FIRE'
-        - 'SOFAConventions' == 'AmbisonicsDRIR'
-        - Mandatory global attribute 'AmbisonicsOrder'
-        - Mandatory Data.IR attributes 'ChannelOrdering' and 'Normalization'
-        - ListenerUp and ListenerView are mandatory
-        - EmitterUp and EmitterView are mandatory
+        - 'SOFAConventions' == 'MultiSpeakerBRIR'
+        - Mandatory attribute 'DatabaseName'
 
         :return:    Boolean
         :raises:    SOFAWarning with error description, in case
@@ -70,30 +67,12 @@ class SOFAAmbisonicsDRIR(SOFAFile):
             warnings.warn('DataType is not FIRE', SOFAWarning)
             return False
 
-        if not self.getGlobalAttributeValue('SOFAConventions') == 'AmbisonicsDRIR':
-            warnings.warn('SOFAConventions is not AmbisonicsDRIR', SOFAWarning)
+        if not self.getGlobalAttributeValue('SOFAConventions') == 'MultiSpeakerBRIR':
+            warnings.warn('SOFAConventions is not MultiSpeakerBRIR', SOFAWarning)
             return False
 
-        if 'AmbisonicsOrder' not in self.getGlobalAttributesAsDict():
-            warnings.warn('Global Attribute AmbisonicsOrder not found', SOFAWarning)
-            return False
-
-        if self.getVariableAttributeValue('Data.IR','ChannelOrdering') is None:
-            warnings.warn('Data.IR Attribute ChannelOrdering not found', SOFAWarning)
-            return False
-
-        if self.getVariableAttributeValue('Data.IR','Normalization') is None:
-            warnings.warn('Data.IR Attribute Normalization not found', SOFAWarning)
-            return False
-
-
-        ##  Variables
-        if not self.hasListenerUp() or not self.hasListenerView():
-            warnings.warn('Mandatory Variables ListenerUp and ListenerView not found', SOFAWarning)
-            return False
-
-        if not self.hasEmitterUp() or not self.hasEmitterView():
-            warnings.warn('Mandatory Variables EmitterUp and EmitterView not found', SOFAWarning)
+        if not self.hasGlobalAttribute('DatabaseName'):
+            warnings.warn('Missing required Global Attribute "DatabaseName"', SOFAWarning)
             return False
 
 

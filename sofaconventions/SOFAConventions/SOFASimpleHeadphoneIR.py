@@ -29,30 +29,36 @@
 #
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 #
-#   @file   SOFASimpleFreeFieldHRIR.py
+#   @file   SOFASimpleHeadphoneIR.py
 #   @author Andrés Pérez-López
 #   @date   29/08/2018
 #
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
-from pysofa import SOFAFile, SOFAWarning
+from sofaconventions import SOFAFile, SOFAWarning
 import warnings
 
-class SOFASimpleFreeFieldHRIR(SOFAFile):
+class SOFASimpleHeadphoneIR(SOFAFile):
 
-    conventionVersionMajor = 1
-    conventionVersionMinor = 0
+    conventionVersionMajor = 0
+    conventionVersionMinor = 2
 
     def isValid(self):
         """
-        Check for GeneralFIR convention consistency
+        Check for convention consistency
         It ensures general file consistency, and also specifics for this convention.
         - 'DataType' == 'FIR'
-        - 'SOFAConventions' == 'SimpleFreeFieldHRIR'
+        - 'SOFAConventions' == 'SimpleHeadphoneIR'
         - 'RoomType' == 'free field'
         - Mandatory attribute 'ListenerShortName'
+        - Mandatory attribute 'ListenerDescription'
+        - Mandatory attribute 'SourceDescription'
+        - Mandatory attribute 'EmitterDescription'
         - Mandatory attribute 'DatabaseName'
-        - E == 1
+        - Mandatory attribute 'SourceModel'
+        - Mandatory attribute 'SourceManufacturer'
+        - Mandatory attribute 'SourceURI'
+        - E == R
 
         :return:    Boolean
         :raises:    SOFAWarning with error description, in case
@@ -70,8 +76,8 @@ class SOFASimpleFreeFieldHRIR(SOFAFile):
             warnings.warn('DataType is not FIR', SOFAWarning)
             return False
 
-        if not self.getGlobalAttributeValue('SOFAConventions') == 'SimpleFreeFieldHRIR':
-            warnings.warn('SOFAConventions is not SimpleFreeFieldHRIR', SOFAWarning)
+        if not self.getGlobalAttributeValue('SOFAConventions') == 'SimpleHeadphoneIR':
+            warnings.warn('SOFAConventions is not SimpleHeadphoneIR', SOFAWarning)
             return False
 
         if not self.getGlobalAttributeValue('RoomType') == 'free field':
@@ -82,14 +88,40 @@ class SOFASimpleFreeFieldHRIR(SOFAFile):
             warnings.warn('Missing required Global Attribute "ListenerShortName"', SOFAWarning)
             return False
 
+        if not self.hasGlobalAttribute('ListenerDescription'):
+            warnings.warn('Missing required Global Attribute "ListenerDescription"', SOFAWarning)
+            return False
+
+        if not self.hasGlobalAttribute('SourceDescription'):
+            warnings.warn('Missing required Global Attribute "SourceDescription"', SOFAWarning)
+            return False
+
+        if not self.hasGlobalAttribute('EmitterDescription'):
+            warnings.warn('Missing required Global Attribute "EmitterDescription"', SOFAWarning)
+            return False
+
         if not self.hasGlobalAttribute('DatabaseName'):
             warnings.warn('Missing required Global Attribute "DatabaseName"', SOFAWarning)
             return False
 
-        ## Dimensions
-        if not self.getDimensionSize('E') == 1:
-            warnings.warn('Number of emitters (E) should be 1, got '
-                          +str(self.getDimensionSize('E')), SOFAWarning)
+        if not self.hasGlobalAttribute('SourceModel'):
+            warnings.warn('Missing required Global Attribute "SourceModel"', SOFAWarning)
             return False
+
+        if not self.hasGlobalAttribute('SourceManufacturer'):
+            warnings.warn('Missing required Global Attribute "SourceManufacturer"', SOFAWarning)
+            return False
+
+        if not self.hasGlobalAttribute('SourceURI'):
+            warnings.warn('Missing required Global Attribute "SourceURI"', SOFAWarning)
+            return False
+
+        ## Dimensions
+        if not self.getDimensionSize('E') == self.getDimensionSize('R'):
+            warnings.warn('Number of emitters (E) and number of receivers (R) should match, got  '
+                          +str(self.getDimensionSize('E')) + ","
+                          +str(self.getDimensionSize('R')), SOFAWarning)
+            return False
+
 
         return True

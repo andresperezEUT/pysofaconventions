@@ -4,14 +4,14 @@
 #
 #   createTestFile.py
 #
-#   Reference implementation for SOFA file creation with pysofa
+#   Reference implementation for SOFA file creation with sofaconventions
 #
 #   (C) Andrés Pérez-López - Eurecat / UPF
 #   24/08/2018
 #
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
-from pysofa import *
+from sofaconventions import *
 from netCDF4 import Dataset
 import time
 import numpy as np
@@ -28,7 +28,7 @@ rootgrp.Conventions = 'SOFA'
 rootgrp.Version = '1.0'
 rootgrp.SOFAConventions = 'AmbisonicsDRIR'
 rootgrp.SOFAConventionsVersion = '0.1'
-rootgrp.APIName = 'pysofa'
+rootgrp.APIName = 'sofaconventions'
 rootgrp.APIVersion = '0.1'
 rootgrp.APIVersion = '0.1'
 rootgrp.AuthorContact = 'andres.perez@eurecat.org'
