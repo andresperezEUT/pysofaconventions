@@ -28,7 +28,7 @@ before_install:
 #    - conda update -q conda
 #    - conda info -a
 #    - deps='pip atlas numpy scipy sphinx nose six future pep8 matplotlib decorator'
-#    - deps='pip numpy scipy'
+    - deps='pip'
 #    - conda create -q -n test-environment "python=$TRAVIS_PYTHON_VERSION" $deps
 #    - source activate test-environment
 #    - conda install -c conda-forge ffmpeg
@@ -39,7 +39,7 @@ before_install:
     - pip install netCDF4
 
 install:
-#    - pip install -e .[tests]
+    - pip install -e .[tests]
 
 #before_script:
 #    - pep8 mir_eval evaluators tests
