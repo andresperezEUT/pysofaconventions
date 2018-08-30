@@ -1,6 +1,6 @@
 # pysofa
 
-
+[![License](https://img.shields.io/badge/License-BSD%203--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
 [![Build Status](https://travis-ci.org/andresperezlopez/pysofa.svg?branch=master)](https://travis-ci.org/andresperezlopez/pysofa)
 [![Coverage Status](https://coveralls.io/repos/github/andresperezlopez/pysofa/badge.svg?branch=master)](https://coveralls.io/github/andresperezlopez/pysofa?branch=master)
 
@@ -36,6 +36,11 @@ sudo pip install -e .
 ## dependencies
 
 - netCDF4
+
+
+## examples
+
+Check the /examples folder to see some reference implementations
 
 
 

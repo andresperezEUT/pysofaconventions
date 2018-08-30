@@ -17,10 +17,11 @@ setup(
         'Documentation': 'https://pysofa.readthedocs.io/',
         'Source': 'https://github.com/andresperezlopez/pysofa',
     },
-    license='GNU GPLv3.0',
+    license='BSD-3-Clause',
     classifiers=[
-            "Development Status :: 4 - Beta"
-            "License :: OSI Approved :: GNU GPLv3.0",
+            "Development Status :: 4 - Beta",
+            "License :: OSI Approved :: BSD License",
+            "Operating System :: OS Independent",
             "Programming Language :: Python",
             "Development Status :: 3 - Alpha",
             "Intended Audience :: Developers",

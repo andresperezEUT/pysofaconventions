@@ -40,3 +40,9 @@ tmtagsHistory
 *.sublime-workspace
 .bundle
 .cache
+
+# pip #
+#######
+build/*
+dist/*
+pysofa.egg-info/*
