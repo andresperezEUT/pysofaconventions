@@ -49,7 +49,7 @@ script:
 #    - python setup.py build_sphinx
 #    - python setup.py egg_info -b.dev sdist --formats gztar
 #     - py.test
-    - pytest --cov -s --cov-report term-missing
+    - pytest --cov -s --cov-report term-missing tests
 
 after_success:
     - coveralls
