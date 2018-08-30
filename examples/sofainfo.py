@@ -11,7 +11,7 @@
 #
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
-from sofaconventions import *
+from pysofaconventions import *
 
 def printLine():
     print("-----------------------------------------------------------------------\n")
@@ -21,7 +21,7 @@ def printBlankLine():
 
 
 # Set here your SOFA file path
-path = "/Volumes/Dinge/SOFA/testpysofa.sofa"
+path = "/Volumes/Dinge/SOFA/testpysofaconventions.sofa"
 
 # Open the file for reading
 file = SOFAFile(path,"r")

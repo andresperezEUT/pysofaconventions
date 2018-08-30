@@ -40,7 +40,7 @@ import os
 import tempfile
 from netCDF4 import Dataset
 import time
-from sofaconventions import *
+from pysofaconventions import *
 import sys
 import numpy as np
 from collections import OrderedDict
@@ -70,7 +70,7 @@ def test_isValid():
     rootgrp.Version = '1.0'
     rootgrp.SOFAConventions = 'AmbisonicsDRIR'
     rootgrp.SOFAConventionsVersion = '0.1'
-    rootgrp.APIName = 'sofaconventions'
+    rootgrp.APIName = 'pysofaconventions'
     rootgrp.APIVersion = '0.1'
     rootgrp.APIVersion = '0.1'
     rootgrp.AuthorContact = 'andres.perez@eurecat.org'
@@ -80,7 +80,7 @@ def test_isValid():
     rootgrp.RoomType = 'reverberant'
     rootgrp.DateCreated = time.ctime(time.time())
     rootgrp.DateModified = time.ctime(time.time())
-    rootgrp.Title = 'testpysofa'
+    rootgrp.Title = 'testpysofaconventions'
     rootgrp.close()
 
     sofafile = SOFAFile(path, 'r')
@@ -1379,7 +1379,7 @@ def test_checkSOFARequiredAttributes():
     rootgrp.Version = '1.0'
     rootgrp.SOFAConventions = 'AmbisonicsDRIR'
     rootgrp.SOFAConventionsVersion = '0.1'
-    rootgrp.APIName = 'sofaconventions'
+    rootgrp.APIName = 'pysofaconventions'
     rootgrp.APIVersion = '0.1'
     rootgrp.APIVersion = '0.1'
     rootgrp.AuthorContact = 'andres.perez@eurecat.org'
@@ -1389,7 +1389,7 @@ def test_checkSOFARequiredAttributes():
     rootgrp.RoomType = 'reverberant'
     rootgrp.DateCreated = time.ctime(time.time())
     rootgrp.DateModified = time.ctime(time.time())
-    rootgrp.Title = 'testpysofa'
+    rootgrp.Title = 'testpysofaconventions'
     rootgrp.close()
     assert SOFAFile(path, 'r').checkSOFARequiredAttributes()
     os.remove(path)

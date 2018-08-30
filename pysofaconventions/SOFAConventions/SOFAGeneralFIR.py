@@ -35,10 +35,10 @@
 #
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
-from sofaconventions import SOFAFile, SOFAWarning
+from pysofaconventions import SOFAFile, SOFAWarning
 import warnings
 
-class SOFAGeneralFIRE(SOFAFile):
+class SOFAGeneralFIR(SOFAFile):
 
     conventionVersionMajor = 1
     conventionVersionMinor = 0
@@ -47,8 +47,8 @@ class SOFAGeneralFIRE(SOFAFile):
         """
         Check for convention consistency
         It ensures general file consistency, and also specifics for this convention.
-        - 'DataType' == 'FIRE'
-        - 'SOFAConventions' == 'GeneralFIRE'
+        - 'DataType' == 'FIR'
+        - 'SOFAConventions' == 'GeneralFIR'
 
         :return:    Boolean
         :raises:    SOFAWarning with error description, in case
@@ -62,12 +62,12 @@ class SOFAGeneralFIRE(SOFAFile):
         # Ensure specifics of this convention
 
         ## Attributes
-        if not self.isFIREDataType():
-            warnings.warn('DataType is not FIRE', SOFAWarning)
+        if not self.isFIRDataType():
+            warnings.warn('DataType is not FIR', SOFAWarning)
             return False
 
-        if not self.getGlobalAttributeValue('SOFAConventions') == 'GeneralFIRE':
-            warnings.warn('SOFAConventions is not GeneralFIRE', SOFAWarning)
+        if not self.getGlobalAttributeValue('SOFAConventions') == 'GeneralFIR':
+            warnings.warn('SOFAConventions is not GeneralFIR', SOFAWarning)
             return False
 
         return True

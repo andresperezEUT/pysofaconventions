@@ -29,19 +29,45 @@
 #
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 #
-#   @file   SOFAVersion.py
+#   @file   SOFAGeneralFIRE.py
 #   @author Andrés Pérez-López
 #   @date   29/08/2018
 #
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
-class SOFAVersion:
+from pysofaconventions import SOFAFile, SOFAWarning
+import warnings
 
-    # Version of sofaconventions
-    SOFAVersionMajor = 0
-    SOFAVersionMinor = 1
-    SOFAVersionRelease = 0
+class SOFAGeneralFIRE(SOFAFile):
 
-    # Version of SOFA specs
-    SOFASpecificationsMajor = 1
-    SOFASpecificationsMinor = 0
+    conventionVersionMajor = 1
+    conventionVersionMinor = 0
+
+    def isValid(self):
+        """
+        Check for convention consistency
+        It ensures general file consistency, and also specifics for this convention.
+        - 'DataType' == 'FIRE'
+        - 'SOFAConventions' == 'GeneralFIRE'
+
+        :return:    Boolean
+        :raises:    SOFAWarning with error description, in case
+        """
+
+        # Check general file validity
+        if not SOFAFile.isValid(self):
+            return False
+
+
+        # Ensure specifics of this convention
+
+        ## Attributes
+        if not self.isFIREDataType():
+            warnings.warn('DataType is not FIRE', SOFAWarning)
+            return False
+
+        if not self.getGlobalAttributeValue('SOFAConventions') == 'GeneralFIRE':
+            warnings.warn('SOFAConventions is not GeneralFIRE', SOFAWarning)
+            return False
+
+        return True

@@ -1,0 +1,30 @@
+Metadata-Version: 2.1
+Name: pysofaconventions
+Version: 0.1.0
+Summary: pysofaconventions: python implementation of the SOFA Convention
+Home-page: https://andresperezlopez.github.io/pysofaconventions/
+Author: Andres Perez-Lopez
+Author-email: andres.perez@upf.edu
+License: BSD-3-Clause
+Project-URL: Project page, https://andresperezlopez.github.io/pysofaconventions/
+Project-URL: Source, https://github.com/andresperezlopez/pysofaconventions
+Project-URL: Documentation, https://pysofaconventions.readthedocs.io/
+Description: pysofaconventions: python implementation of the Spatially Oriented Format for Acoustics Convention
+Keywords: SOFA HRTF binaural Ambisonics
+Platform: UNKNOWN
+Classifier: Development Status :: 4 - Beta
+Classifier: License :: OSI Approved :: BSD License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Developers
+Classifier: Intended Audience :: Science/Research
+Classifier: Topic :: Multimedia :: Sound/Audio :: Analysis
+Classifier: Topic :: Multimedia :: Sound/Audio :: Sound Synthesis
+Classifier: Programming Language :: Python :: 2
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Provides-Extra: docs

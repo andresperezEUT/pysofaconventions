@@ -29,16 +29,16 @@
 #
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 #
-#   @file   SOFAGeneralFIRE.py
+#   @file   SOFASimpleFreeFieldSOS.py
 #   @author Andrés Pérez-López
 #   @date   29/08/2018
 #
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
-from sofaconventions import SOFAFile, SOFAWarning
+from pysofaconventions import SOFAFile, SOFAWarning
 import warnings
 
-class SOFAGeneralFIR(SOFAFile):
+class SOFASimpleFreeFieldSOS(SOFAFile):
 
     conventionVersionMajor = 1
     conventionVersionMinor = 0
@@ -47,8 +47,12 @@ class SOFAGeneralFIR(SOFAFile):
         """
         Check for convention consistency
         It ensures general file consistency, and also specifics for this convention.
-        - 'DataType' == 'FIR'
-        - 'SOFAConventions' == 'GeneralFIR'
+        - 'DataType' == 'SOS'
+        - 'SOFAConventions' == 'SimpleFreeFieldSOS'
+        - 'RoomType' == 'free field'
+        - Mandatory attribute 'DatabaseName'
+        - E == 1
+        - N must be multiple of 6
 
         :return:    Boolean
         :raises:    SOFAWarning with error description, in case
@@ -62,12 +66,32 @@ class SOFAGeneralFIR(SOFAFile):
         # Ensure specifics of this convention
 
         ## Attributes
-        if not self.isFIRDataType():
-            warnings.warn('DataType is not FIR', SOFAWarning)
+        if not self.isSOSDataType():
+            warnings.warn('DataType is not SOS', SOFAWarning)
             return False
 
-        if not self.getGlobalAttributeValue('SOFAConventions') == 'GeneralFIR':
-            warnings.warn('SOFAConventions is not GeneralFIR', SOFAWarning)
+        if not self.getGlobalAttributeValue('SOFAConventions') == 'SimpleFreeFieldSOS':
+            warnings.warn('SOFAConventions is not SimpleFreeFieldSOS', SOFAWarning)
+            return False
+
+        if not self.getGlobalAttributeValue('RoomType') == 'free field':
+            warnings.warn('RoomType is not "free field"', SOFAWarning)
+            return False
+
+
+        if not self.hasGlobalAttribute('DatabaseName'):
+            warnings.warn('Missing required Global Attribute "DatabaseName"', SOFAWarning)
+            return False
+
+        ## Dimensions
+        if not self.getDimensionSize('E') == 1:
+            warnings.warn('Number of emitters (E) should be 1, got '
+                          +str(self.getDimensionSize('E')), SOFAWarning)
+            return False
+
+        if not (self.getDimensionSize('N') % 6 == 0):
+            warnings.warn('Number of emitters (N) should be multiple of 6, got '
+                          +str(self.getDimensionSize('N')), SOFAWarning)
             return False
 
         return True

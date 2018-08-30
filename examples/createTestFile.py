@@ -4,21 +4,21 @@
 #
 #   createTestFile.py
 #
-#   Reference implementation for SOFA file creation with sofaconventions
+#   Reference implementation for SOFA file creation with pysofaconventions
 #
 #   (C) Andrés Pérez-López - Eurecat / UPF
 #   24/08/2018
 #
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
-from sofaconventions import *
+from pysofaconventions import *
 from netCDF4 import Dataset
 import time
 import numpy as np
 
 #----------Create it----------#
 
-filePath = "/Volumes/Dinge/SOFA/testpysofa.sofa"
+filePath = "/Volumes/Dinge/SOFA/testpysofaconventions.sofa"
 rootgrp = Dataset(filePath, 'w', format='NETCDF4')
 
 
@@ -28,7 +28,7 @@ rootgrp.Conventions = 'SOFA'
 rootgrp.Version = '1.0'
 rootgrp.SOFAConventions = 'AmbisonicsDRIR'
 rootgrp.SOFAConventionsVersion = '0.1'
-rootgrp.APIName = 'sofaconventions'
+rootgrp.APIName = 'pysofaconventions'
 rootgrp.APIVersion = '0.1'
 rootgrp.APIVersion = '0.1'
 rootgrp.AuthorContact = 'andres.perez@eurecat.org'
@@ -38,7 +38,7 @@ rootgrp.DataType = 'FIRE'
 rootgrp.RoomType = 'reverberant'
 rootgrp.DateCreated = time.ctime(time.time())
 rootgrp.DateModified = time.ctime(time.time())
-rootgrp.Title = 'testpysofa'
+rootgrp.Title = 'testpysofaconventions'
 rootgrp.AmbisonicsOrder = '1'
 
 

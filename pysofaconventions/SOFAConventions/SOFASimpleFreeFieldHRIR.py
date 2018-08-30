@@ -29,30 +29,30 @@
 #
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 #
-#   @file   SOFAAmbisonicsDRIR.py
+#   @file   SOFASimpleFreeFieldHRIR.py
 #   @author Andrés Pérez-López
 #   @date   29/08/2018
 #
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
-from sofaconventions import SOFAFile, SOFAWarning
+from pysofaconventions import SOFAFile, SOFAWarning
 import warnings
 
-class SOFAAmbisonicsDRIR(SOFAFile):
+class SOFASimpleFreeFieldHRIR(SOFAFile):
 
-    conventionVersionMajor = 0
-    conventionVersionMinor = 1
+    conventionVersionMajor = 1
+    conventionVersionMinor = 0
 
     def isValid(self):
         """
-        Check for convention consistency
+        Check for GeneralFIR convention consistency
         It ensures general file consistency, and also specifics for this convention.
-        - 'DataType' == 'FIRE'
-        - 'SOFAConventions' == 'AmbisonicsDRIR'
-        - Mandatory global attribute 'AmbisonicsOrder'
-        - Mandatory Data.IR attributes 'ChannelOrdering' and 'Normalization'
-        - ListenerUp and ListenerView are mandatory
-        - EmitterUp and EmitterView are mandatory
+        - 'DataType' == 'FIR'
+        - 'SOFAConventions' == 'SimpleFreeFieldHRIR'
+        - 'RoomType' == 'free field'
+        - Mandatory attribute 'ListenerShortName'
+        - Mandatory attribute 'DatabaseName'
+        - E == 1
 
         :return:    Boolean
         :raises:    SOFAWarning with error description, in case
@@ -66,35 +66,30 @@ class SOFAAmbisonicsDRIR(SOFAFile):
         # Ensure specifics of this convention
 
         ## Attributes
-        if not self.isFIREDataType():
-            warnings.warn('DataType is not FIRE', SOFAWarning)
+        if not self.isFIRDataType():
+            warnings.warn('DataType is not FIR', SOFAWarning)
             return False
 
-        if not self.getGlobalAttributeValue('SOFAConventions') == 'AmbisonicsDRIR':
-            warnings.warn('SOFAConventions is not AmbisonicsDRIR', SOFAWarning)
+        if not self.getGlobalAttributeValue('SOFAConventions') == 'SimpleFreeFieldHRIR':
+            warnings.warn('SOFAConventions is not SimpleFreeFieldHRIR', SOFAWarning)
             return False
 
-        if 'AmbisonicsOrder' not in self.getGlobalAttributesAsDict():
-            warnings.warn('Global Attribute AmbisonicsOrder not found', SOFAWarning)
+        if not self.getGlobalAttributeValue('RoomType') == 'free field':
+            warnings.warn('RoomType is not "free field"', SOFAWarning)
             return False
 
-        if self.getVariableAttributeValue('Data.IR','ChannelOrdering') is None:
-            warnings.warn('Data.IR Attribute ChannelOrdering not found', SOFAWarning)
+        if not self.hasGlobalAttribute('ListenerShortName'):
+            warnings.warn('Missing required Global Attribute "ListenerShortName"', SOFAWarning)
             return False
 
-        if self.getVariableAttributeValue('Data.IR','Normalization') is None:
-            warnings.warn('Data.IR Attribute Normalization not found', SOFAWarning)
+        if not self.hasGlobalAttribute('DatabaseName'):
+            warnings.warn('Missing required Global Attribute "DatabaseName"', SOFAWarning)
             return False
 
-
-        ##  Variables
-        if not self.hasListenerUp() or not self.hasListenerView():
-            warnings.warn('Mandatory Variables ListenerUp and ListenerView not found', SOFAWarning)
+        ## Dimensions
+        if not self.getDimensionSize('E') == 1:
+            warnings.warn('Number of emitters (E) should be 1, got '
+                          +str(self.getDimensionSize('E')), SOFAWarning)
             return False
-
-        if not self.hasEmitterUp() or not self.hasEmitterView():
-            warnings.warn('Mandatory Variables EmitterUp and EmitterView not found', SOFAWarning)
-            return False
-
 
         return True

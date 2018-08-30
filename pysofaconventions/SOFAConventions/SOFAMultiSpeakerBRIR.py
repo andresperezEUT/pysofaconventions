@@ -29,16 +29,16 @@
 #
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 #
-#   @file   SOFASingleRoom.py
+#   @file   SOFAMultiSpeakerBRIR.py
 #   @author Andrés Pérez-López
 #   @date   29/08/2018
 #
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
-from sofaconventions import SOFAFile, SOFAWarning
+from pysofaconventions import SOFAFile, SOFAWarning
 import warnings
 
-class SOFASingleRoomDRIR(SOFAFile):
+class SOFAMultiSpeakerBRIR(SOFAFile):
 
     conventionVersionMajor = 0
     conventionVersionMinor = 3
@@ -47,12 +47,9 @@ class SOFASingleRoomDRIR(SOFAFile):
         """
         Check for convention consistency
         It ensures general file consistency, and also specifics for this convention.
-        - 'DataType' == 'FIR'
-        - 'SOFAConventions' == 'SingleRoomDRIR'
-        - 'RoomType' == 'reverberant'
-        - Mandatory attribute 'RoomDescription'
-        - ListenerUp and ListenerView are mandatory
-        - E == 1
+        - 'DataType' == 'FIRE'
+        - 'SOFAConventions' == 'MultiSpeakerBRIR'
+        - Mandatory attribute 'DatabaseName'
 
         :return:    Boolean
         :raises:    SOFAWarning with error description, in case
@@ -66,34 +63,17 @@ class SOFASingleRoomDRIR(SOFAFile):
         # Ensure specifics of this convention
 
         ## Attributes
-        if not self.isFIRDataType():
-            warnings.warn('DataType is not FIR', SOFAWarning)
+        if not self.isFIREDataType():
+            warnings.warn('DataType is not FIRE', SOFAWarning)
             return False
 
-        if not self.getGlobalAttributeValue('SOFAConventions') == 'SingleRoomDRIR':
-            warnings.warn('SOFAConventions is not SingleRoomDRIR', SOFAWarning)
+        if not self.getGlobalAttributeValue('SOFAConventions') == 'MultiSpeakerBRIR':
+            warnings.warn('SOFAConventions is not MultiSpeakerBRIR', SOFAWarning)
             return False
 
-        if not self.getGlobalAttributeValue('RoomType') == 'reverberant':
-            warnings.warn('RoomType is not "reverberant, got: "'
-                          +self.getGlobalAttributeValue('RoomType'), SOFAWarning)
+        if not self.hasGlobalAttribute('DatabaseName'):
+            warnings.warn('Missing required Global Attribute "DatabaseName"', SOFAWarning)
             return False
 
-        if not self.hasGlobalAttribute('RoomDescription'):
-            warnings.warn('Missing required Global Attribute "RoomDescription"', SOFAWarning)
-            return False
-
-
-        ##  Variables
-        if not self.hasListenerUp() or not self.hasListenerView():
-            warnings.warn('Mandatory Variables ListenerUp and ListenerView not found', SOFAWarning)
-            return False
-
-
-        ## Dimensions
-        if not self.getDimensionSize('E') == 1:
-            warnings.warn('Number of emitters (E) should be 1, got '
-                          +str(self.getDimensionSize('E')), SOFAWarning)
-            return False
 
         return True

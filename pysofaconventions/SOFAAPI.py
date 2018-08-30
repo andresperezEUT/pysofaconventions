@@ -39,7 +39,7 @@ from .SOFAVersion import SOFAVersion
 
 class SOFAAPI:
 
-    APIName = 'sofaconventions'
+    APIName = 'pysofaconventions'
     copyrightString = "Copyright (c) 2018 Eurecat / UPF\n All rights reserved"
 
     @classmethod

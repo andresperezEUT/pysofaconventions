@@ -39,7 +39,7 @@ import pytest
 import os
 import tempfile
 from netCDF4 import Dataset
-from sofaconventions import *
+from pysofaconventions import *
 
 
 

@@ -1,8 +1,8 @@
-# pysofa
+# pysofaconventions
 
 [![License](https://img.shields.io/badge/License-BSD%203--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
-[![Build Status](https://travis-ci.org/andresperezlopez/pysofa.svg?branch=master)](https://travis-ci.org/andresperezlopez/pysofa)
-[![Coverage Status](https://coveralls.io/repos/github/andresperezlopez/pysofa/badge.svg?branch=master)](https://coveralls.io/github/andresperezlopez/pysofa?branch=master)
+[![Build Status](https://travis-ci.org/andresperezlopez/pysofaconventions.svg?branch=master)](https://travis-ci.org/andresperezlopez/pysofaconventions)
+[![Coverage Status](https://coveralls.io/repos/github/andresperezlopez/pysofaconventions/badge.svg?branch=master)](https://coveralls.io/github/andresperezlopez/pysofaconventions?branch=master)
 
 
 Python implementation of the SOFA Specification
@@ -23,12 +23,12 @@ TODO!
 
 Clone the sources from github:
 ```
-git clone https://github.com/andresperezlopez/pysofa.git
+git clone https://github.com/andresperezlopez/pysofaconventions.git
 ```
 
 Then enter the source folder and install using pip to handle python dependencies:
 ```
-cd pysofa
+cd pysofaconventions
 sudo pip install -e .
 ```
 

@@ -40,7 +40,7 @@ import os
 import tempfile
 import time
 from netCDF4 import Dataset
-from sofaconventions import *
+from pysofaconventions import *
 
 
 def test_getConventionVersion():
@@ -75,7 +75,7 @@ def test_isValid():
     rootgrp.Version = '1.0'
     rootgrp.SOFAConventions = 'GeneralFIRE'
     rootgrp.SOFAConventionsVersion = '0.1'
-    rootgrp.APIName = 'sofaconventions'
+    rootgrp.APIName = 'pysofaconventions'
     rootgrp.APIVersion = '0.1'
     rootgrp.APIVersion = '0.1'
     rootgrp.AuthorContact = 'andres.perez@eurecat.org'
@@ -85,7 +85,7 @@ def test_isValid():
     rootgrp.RoomType = 'free field'
     rootgrp.DateCreated = time.ctime(time.time())
     rootgrp.DateModified = time.ctime(time.time())
-    rootgrp.Title = 'testpysofa'
+    rootgrp.Title = 'testpysofaconventions'
     # Dimensions
     rootgrp.createDimension('I', 1)
     rootgrp.createDimension('N', 2)

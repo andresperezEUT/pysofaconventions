@@ -40,7 +40,7 @@ import os
 import tempfile
 from netCDF4 import Dataset
 import numpy as np
-from sofaconventions import *
+from pysofaconventions import *
 from collections import OrderedDict
 
 def test_close():

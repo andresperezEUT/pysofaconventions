@@ -36,7 +36,7 @@
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
 import pytest
-from sofaconventions import *
+from pysofaconventions import *
 
 
 def test_getType():
