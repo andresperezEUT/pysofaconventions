@@ -134,10 +134,10 @@ def test_getDimensionsAsDict():
     dimB = rootgrp.createDimension('B',2)
     rootgrp.close()
 
-    targetDict = OrderedDict({
-        'A': dimA,
-        'B': dimB
-    })
+    targetDict = OrderedDict([
+        ('A',dimA),
+        ('B',dimB)
+    ])
 
     sofafile = SOFAFile(path, 'r')
     sofaNcFile = sofafile.ncfile
