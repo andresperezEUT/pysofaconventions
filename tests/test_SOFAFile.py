@@ -43,7 +43,7 @@ import time
 from pysofa import *
 import sys
 import numpy as np
-import six  # for iteritems 3.X compat
+from collections import OrderedDict
 
 
 def test_isValid():
@@ -287,18 +287,19 @@ def test_getDimensionsAsDict():
     dimB = rootgrp.createDimension('B',2)
     rootgrp.close()
 
-    targetDict = {
+    targetDict = OrderedDict({
         'A': dimA,
         'B': dimB
-    }
-    sofafile = SOFAFile(path, 'r')
+    })
 
-    # Check that the returned dict keys, and also the name and size of the dimensions match
-    for i, (key, value) in enumerate(six.iteritems(sofafile.getDimensionsAsDict())):
-        k, v = targetDict.items()[i]
-        assert key == k
-        assert value.name == v.name
-        assert value.size == v.size
+    sofafile = SOFAFile(path, 'r')
+    # Assert dimension names are equal
+    for k1, k2 in zip(targetDict.keys(), sofafile.getDimensionsAsDict().keys()):
+        assert k1 == k2
+    # Assert dimension instances (value and name) are equal
+    for v1, v2 in zip(targetDict.values(), sofafile.getDimensionsAsDict().values()):
+        assert v1.name == v2.name
+        assert v1.size == v2.size
 
     sofafile.close()
     os.remove(path)
@@ -371,15 +372,18 @@ def test_getVariablesAsDict():
     rootgrp = Dataset(path, 'w', format='NETCDF4')
     rootgrp.createVariable(variableName1, 'f8', ())
     rootgrp.createVariable(variableName2, 'f8', ())
-    variableDict = rootgrp.variables
+    variableDict = OrderedDict(rootgrp.variables)
     rootgrp.close()
 
     sofafile = SOFAFile(path, 'r')
-    # Compare independently, one by one, all items in the dict
-    for i, (key, value) in enumerate(six.iteritems(variableDict)):
-        k, v = sofafile.getVariablesAsDict().items()[i]
-        assert key == k
-        assert value.__dict__ == v.__dict__
+    # Assert variable names are equal
+    for k1, k2 in zip(variableDict.keys(), sofafile.getVariablesAsDict().keys()):
+        assert k1 == k2
+    # Assert variable instances are equal (through internal dict)
+    for v1, v2 in zip(variableDict.values(), sofafile.getVariablesAsDict().values()):
+        assert v1.__dict__ == v2.__dict__
+
+
     sofafile.close()
 
     os.remove(path)
@@ -431,7 +435,7 @@ def test_getVariableShape():
 
     # Variable exists
     rootgrp = Dataset(path, 'a')
-    for name,value in six.iteritems(dimensions):
+    for name, value in zip(dimensions.keys(), dimensions.values()):
         rootgrp.createDimension(name, value)
     var = rootgrp.createVariable(variableName, 'f8', tuple(dimensions.keys()))
     rootgrp.close()
@@ -464,7 +468,7 @@ def test_getVariableDimensionality():
 
     # Variable exists
     rootgrp = Dataset(path, 'a')
-    for name,value in six.iteritems(dimensions):
+    for name, value in zip(dimensions.keys(), dimensions.values()):
         rootgrp.createDimension(name, value)
     var = rootgrp.createVariable(variableName, 'f8', tuple(dimensions.keys()))
     rootgrp.close()

@@ -41,7 +41,7 @@ import tempfile
 from netCDF4 import Dataset
 import numpy as np
 from pysofa import *
-import six  # for iteritems 3.X compat
+from collections import OrderedDict
 
 def test_close():
 
@@ -134,19 +134,22 @@ def test_getDimensionsAsDict():
     dimB = rootgrp.createDimension('B',2)
     rootgrp.close()
 
-    targetDict = {
+    targetDict = OrderedDict({
         'A': dimA,
         'B': dimB
-    }
+    })
+
     sofafile = SOFAFile(path, 'r')
     sofaNcFile = sofafile.ncfile
 
-    # Check that the returned dict keys, and also the name and size of the dimensions match
-    for i, (key, value) in enumerate(six.iteritems(sofaNcFile.getDimensionsAsDict())):
-        k, v = targetDict.items()[i]
-        assert key == k
-        assert value.name == v.name
-        assert value.size == v.size
+    # Assert dimension names are equal
+    for k1, k2 in zip(targetDict.keys(), sofaNcFile.getDimensionsAsDict().keys()):
+        assert k1 == k2
+    # Assert dimension instances (value and name) are equal
+    for v1, v2 in zip(targetDict.values(), sofaNcFile.getDimensionsAsDict().values()):
+        assert v1.name == v2.name
+        assert v1.size == v2.size
+
 
     sofafile.close()
     os.remove(path)
@@ -221,19 +224,20 @@ def test_getVariablesAsDict():
     rootgrp = Dataset(path, 'w', format='NETCDF4')
     rootgrp.createVariable(variableName1, 'f8', ())
     rootgrp.createVariable(variableName2, 'f8', ())
-    variableDict = rootgrp.variables
+    variableDict = OrderedDict(rootgrp.variables)
     rootgrp.close()
 
     sofafile = SOFAFile(path, 'r')
     sofaNcFile = sofafile.ncfile
 
-    # Compare independently, one by one, all items in the dict
-    for i, (key, value) in enumerate(six.iteritems(variableDict)):
-        k, v = sofaNcFile.getVariablesAsDict().items()[i]
-        assert key == k
-        assert value.__dict__ == v.__dict__
-    sofafile.close()
+    # Assert variable names are equal
+    for k1, k2 in zip(variableDict.keys(), sofaNcFile.getVariablesAsDict().keys()):
+        assert k1 == k2
+    # Assert variable instances are equal (through internal dict)
+    for v1, v2 in zip(variableDict.values(), sofaNcFile.getVariablesAsDict().values()):
+        assert v1.__dict__ == v2.__dict__
 
+    sofafile.close()
     os.remove(path)
 
 
