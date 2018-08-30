@@ -1,21 +1,15 @@
 from setuptools import setup, find_packages
-import imp
+import pysofa.SOFAAPI
 
-
-
-# version = pysofa.SOFAAPI.getAPIVersion()
-# version = imp.load_source('ambiscaper.version', 'ambiscaper/version.py')
-version = "0.1"
 
 setup(
     name='pysofa',
-    version=version,
+    version=pysofa.SOFAAPI.getAPIVersion(),
     description='pysofa: python implementation of the SOFA conventions',
     author='Andres Perez-Lopez',
     author_email='andres.perez@upf.edu',
     url='https://andresperezlopez.github.io/pysofa/',
     packages=['pysofa'],
-    # package_data={'ambiscaper': ['namespaces/ambiscaper_sound_event.json', 'namespaces/ambiscaper_recorded_reverb.json','namespaces/ambiscaper_smir_reverb.json']},
     long_description='pysofa: python implementation of the SOFA conventions',
     keywords='SOFA HRTF binaural Ambisonics',
     project_urls={
