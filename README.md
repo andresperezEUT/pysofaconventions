@@ -1,9 +1,10 @@
 # pysofaconventions
 
+[![PyPI](https://img.shields.io/pypi/v/pysofaconventions.svg)](https://pypi.python.org/pypi/pysofaconventions)
 [![License](https://img.shields.io/badge/License-BSD%203--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
 [![Build Status](https://travis-ci.org/andresperezlopez/pysofaconventions.svg?branch=master)](https://travis-ci.org/andresperezlopez/pysofaconventions)
 [![Coverage Status](https://coveralls.io/repos/github/andresperezlopez/pysofaconventions/badge.svg?branch=master)](https://coveralls.io/github/andresperezlopez/pysofaconventions?branch=master)
-
+[![PyPI](https://img.shields.io/badge/python-2.7%2C%203.4%2C%203.5%2C%203.6-blue.svg)]()
 
 Python implementation of the SOFA Specification
 www.sofaconventions.org
@@ -14,9 +15,9 @@ Based on the [fork by andresperezlopez](https://github.com/andresperezlopez/API_
 
 ## installation
 
-### using pip
+### automatic installation
 
-TODO!
+`sudo pip install pysofaconventions`
 
 
 ### manual installation
@@ -40,7 +41,7 @@ sudo pip install -e .
 
 ## examples
 
-Check the /examples folder to see some reference implementations
+Check the /examples folder to see some reference implementations.
 
 
 
