@@ -9,7 +9,7 @@ setup(
     author='Andres Perez-Lopez',
     author_email='andres.perez@upf.edu',
     url='https://andresperezlopez.github.io/pysofaconventions/',
-    packages=['pysofaconventions'],
+    packages=find_packages(),
     long_description='pysofaconventions: python implementation of the Spatially Oriented Format for Acoustics Convention',
     keywords='SOFA HRTF binaural Ambisonics',
     project_urls={

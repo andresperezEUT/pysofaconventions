@@ -40,7 +40,7 @@ class SOFAVersion:
     # Version of pysofaconventions
     SOFAVersionMajor = 0
     SOFAVersionMinor = 1
-    SOFAVersionRelease = 0
+    SOFAVersionRelease = 1
 
     # Version of SOFA specs
     SOFASpecificationsMajor = 1
