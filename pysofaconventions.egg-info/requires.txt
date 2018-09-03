@@ -1,3 +1,4 @@
+netCDF4
 
 [docs]
 sphinx==1.2.3
