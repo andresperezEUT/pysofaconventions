@@ -35,8 +35,9 @@ setup(
             "Programming Language :: Python :: 3.5",
             "Programming Language :: Python :: 3.6",
         ],
-    # install_requires=[
-    # ],
+    install_requires=[
+        'netCDF4'
+    ],
     extras_require={
         'docs': [
                 'sphinx==1.2.3',  # autodoc was broken in 1.3.1
