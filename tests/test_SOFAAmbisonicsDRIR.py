@@ -45,7 +45,7 @@ from pysofaconventions import *
 
 def test_getConventionVersion():
 
-    assert SOFAAmbisonicsDRIR.getConventionVersion() == "0.1"
+    assert SOFAAmbisonicsDRIR.getConventionVersion() == "0.2"
 
 
 def test_isValid():
@@ -74,7 +74,7 @@ def test_isValid():
     rootgrp.Conventions = 'SOFA'
     rootgrp.Version = '1.0'
     rootgrp.SOFAConventions = 'GeneralFIR'
-    rootgrp.SOFAConventionsVersion = '0.1'
+    rootgrp.SOFAConventionsVersion = '0.2'
     rootgrp.APIName = 'pysofaconventions'
     rootgrp.APIVersion = '0.1'
     rootgrp.APIVersion = '0.1'
@@ -162,13 +162,13 @@ def test_isValid():
     view.Type = 'cartesian'
     rootgrp.close()
 
-    # Requiered variables EmitterUp and EmitterView
-    raiseWarning('Mandatory Variables EmitterUp and EmitterView not found')
+    # Requiered variables SourceUp and SourceView
+    raiseWarning('Mandatory Variables SourceUp and SourceView not found')
     rootgrp = Dataset(path, 'a')
-    up = rootgrp.createVariable('EmitterUp','f8',('E','C', 'I'))
+    up = rootgrp.createVariable('SourceUp','f8',('I','C'))
     up.Units = 'metre'
     up.Type = 'cartesian'
-    view = rootgrp.createVariable('EmitterView','f8',('E','C', 'I'))
+    view = rootgrp.createVariable('SourceView','f8',('I','C'))
     view.Units = 'metre'
     view.Type = 'cartesian'
     rootgrp.close()

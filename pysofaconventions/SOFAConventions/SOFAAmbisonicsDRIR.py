@@ -41,7 +41,7 @@ import warnings
 class SOFAAmbisonicsDRIR(SOFAFile):
 
     conventionVersionMajor = 0
-    conventionVersionMinor = 1
+    conventionVersionMinor = 2
 
     def isValid(self):
         """
@@ -52,7 +52,7 @@ class SOFAAmbisonicsDRIR(SOFAFile):
         - Mandatory global attribute 'AmbisonicsOrder'
         - Mandatory Data.IR attributes 'ChannelOrdering' and 'Normalization'
         - ListenerUp and ListenerView are mandatory
-        - EmitterUp and EmitterView are mandatory
+        - SourceUp and SourceView are mandatory
 
         :return:    Boolean
         :raises:    SOFAWarning with error description, in case
@@ -92,8 +92,8 @@ class SOFAAmbisonicsDRIR(SOFAFile):
             warnings.warn('Mandatory Variables ListenerUp and ListenerView not found', SOFAWarning)
             return False
 
-        if not self.hasEmitterUp() or not self.hasEmitterView():
-            warnings.warn('Mandatory Variables EmitterUp and EmitterView not found', SOFAWarning)
+        if not self.hasSourceUp() or not self.hasSourceView():
+            warnings.warn('Mandatory Variables SourceUp and SourceView not found', SOFAWarning)
             return False
 
 
