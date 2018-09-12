@@ -47,7 +47,7 @@ rootgrp.AmbisonicsOrder = '1'
 m = 3
 n = 48000
 r = 4
-e = 1
+e = 8
 i = 1
 c = 3
 rootgrp.createDimension('M', m)
@@ -67,32 +67,49 @@ listenerPositionVar[:] = np.zeros(c)
 listenerUpVar       = rootgrp.createVariable('ListenerUp',          'f8',   ('I','C'))
 listenerUpVar.Units         = 'metre'
 listenerUpVar.Type          = 'cartesian'
-listenerUpVar[:]    = np.zeros(c)
+listenerUpVar[:]    = np.asarray([0,0,1])
 
+# Listener looking to the left (+Y axis)
 listenerViewVar     = rootgrp.createVariable('ListenerView',        'f8',   ('I','C'))
 listenerViewVar.Units       = 'metre'
 listenerViewVar.Type        = 'cartesian'
-listenerViewVar[:]  = np.zeros(c)
+listenerViewVar[:]  = np.asarray([0,1,0])
 
 emitterPositionVar  = rootgrp.createVariable('EmitterPosition',     'f8',   ('E','C','I'))
 emitterPositionVar.Units   = 'metre'
-emitterPositionVar.Type    = 'cartesian'
-emitterPositionVar[:] = np.asarray([1,0,0])
+emitterPositionVar.Type    = 'spherical'
+# Equidistributed speakers in circle
+emitterPositionVar[:] = np.ndarray((e,c,i))
+for idx in range(e):
+    azi = idx*360/float(e)
+    ele = 0.
+    dis = 1.
+    emitterPositionVar[idx,:,:] = np.asarray([azi,ele,dis])
 
 emitterUpVar        = rootgrp.createVariable('EmitterUp',           'f8',   ('E','C','I'))
 emitterUpVar.Units         = 'metre'
 emitterUpVar.Type          = 'cartesian'
-emitterUpVar[:]     = np.zeros(c)
+emitterUpVar[:]     = np.zeros((e,c,i))
 
 emitterViewVar      = rootgrp.createVariable('EmitterView',         'f8',   ('E','C','I'))
 emitterViewVar.Units       = 'metre'
 emitterViewVar.Type        = 'cartesian'
-emitterViewVar[:]   = np.zeros(c)
+emitterViewVar[:]   = np.zeros((e,c,i))
 
-sourcePositionVar = rootgrp.createVariable('SourcePosition',    'f8',   ('I','C'))
+sourcePositionVar = rootgrp.createVariable('SourcePosition',        'f8',   ('I','C'))
 sourcePositionVar.Units   = 'metre'
 sourcePositionVar.Type    = 'cartesian'
 sourcePositionVar[:]      = np.zeros(c)
+
+sourceUpVar       = rootgrp.createVariable('SourceUp',              'f8',   ('I','C'))
+sourceUpVar.Units         = 'metre'
+sourceUpVar.Type          = 'cartesian'
+sourceUpVar[:]    = np.asarray([0,0,1])
+
+sourceViewVar     = rootgrp.createVariable('SourceView',            'f8',   ('I','C'))
+sourceViewVar.Units       = 'metre'
+sourceViewVar.Type        = 'cartesian'
+sourceViewVar[:]  = np.asarray([1,0,0])
 
 receiverPositionVar = rootgrp.createVariable('ReceiverPosition',  'f8',   ('R','C','I'))
 receiverPositionVar.Units   = 'metre'
@@ -104,7 +121,7 @@ samplingRateVar.Units = 'hertz'
 samplingRateVar[:] = 48000
 
 delayVar        =   rootgrp.createVariable('Data.Delay',        'f8',   ('I','R','E'))
-delay = np.zeros(r)
+delay = np.zeros((i,r,e))
 delayVar[:,:,:] = delay
 
 dataIRVar =         rootgrp.createVariable('Data.IR', 'f8', ('M','R','E','N'))
