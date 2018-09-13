@@ -22,7 +22,7 @@ def printBlankLine():
 
 # Set here your SOFA file path
 # path = "/Volumes/Dinge/SOFA/HRIR_measured_pp73_pos_0_0.sofa"
-path = "/Volumes/Dinge/SOFA/testpysofaconventions.sofa"
+path = "/Volumes/Dinge/SOFA/miro/sala1.sofa"
 
 # Open the file for reading
 file = SOFAFile(path,"r")
