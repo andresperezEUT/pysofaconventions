@@ -4,7 +4,7 @@
 [![License](https://img.shields.io/badge/License-BSD%203--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
 [![Build Status](https://travis-ci.org/andresperezlopez/pysofaconventions.svg?branch=master)](https://travis-ci.org/andresperezlopez/pysofaconventions)
 [![Coverage Status](https://coveralls.io/repos/github/andresperezlopez/pysofaconventions/badge.svg?branch=master)](https://coveralls.io/github/andresperezlopez/pysofaconventions?branch=master)
-[![PyPI](https://img.shields.io/badge/python-2.7%2C%203.4%2C%203.5%2C%203.6-blue.svg)]()
+[![PyPI](https://img.shields.io/badge/python-2.7%2C%203.5%2C%203.6-blue.svg)]()
 
 Python implementation of the SOFA Specification
 www.sofaconventions.org
@@ -50,3 +50,4 @@ Version 0.1.4, 13/05/2019
 - ListenerUp.Units and ListenerUp.Coordinates are not mandatory
 - SimpleFreeFieldHRIR: mandatory R=2
 - Updated to netCDF4-1.5.1.2
+- Removed remote build version 3.4 (netcdf4 lib incompatibility)
