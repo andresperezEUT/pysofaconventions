@@ -160,7 +160,58 @@ def test_isValid():
     emitterPositionVar.Type = 'cartesian'
     rootgrp.close()
 
+    # Dimension R should be 2
+    raiseWarning('Number of receivers (R) should be 2')
+
+
     # All right
+    # Create a new file from scratch, since changing R will break the file coherence and will produce strange crashes...
+    rootgrp = Dataset(path, 'w', format='NETCDF4')
+    # Attributes
+    rootgrp.Conventions = 'SOFA'
+    rootgrp.Version = '1.0'
+    rootgrp.SOFAConventions = 'SimpleFreeFieldHRIR'
+    rootgrp.SOFAConventionsVersion = '0.1'
+    rootgrp.APIName = 'pysofaconventions'
+    rootgrp.APIVersion = '0.1'
+    rootgrp.APIVersion = '0.1'
+    rootgrp.AuthorContact = 'andres.perez@eurecat.org'
+    rootgrp.Organization = 'Eurecat - UPF'
+    rootgrp.License = 'WTFPL - Do What the Fuck You Want to Public License'
+    rootgrp.DataType = 'FIR'
+    rootgrp.RoomType = 'free field'
+    rootgrp.DateCreated = time.ctime(time.time())
+    rootgrp.DateModified = time.ctime(time.time())
+    rootgrp.Title = 'testpysofaconventions'
+    rootgrp.ListenerShortName = 'AmazinglyShortName'
+    rootgrp.DatabaseName = 'IncredibleDatabase'
+    # Dimensions
+    rootgrp.createDimension('I', 1)
+    rootgrp.createDimension('N', 2)
+    rootgrp.createDimension('C', 3)
+    rootgrp.createDimension('M', 4)
+    rootgrp.createDimension('R', 2)
+    rootgrp.createDimension('E', 1)
+    # Variables
+    sr = rootgrp.createVariable('Data.SamplingRate', 'f8', ('I',))
+    sr.Units = 'hertz'
+    rootgrp.createVariable('Data.Delay', 'f8', ('M', 'R'))
+    rootgrp.createVariable('Data.IR', 'f8', ('M', 'R', 'N'))
+    listenerPositionVar = rootgrp.createVariable('ListenerPosition', 'f8', ('I', 'C'))
+    listenerPositionVar.Units = 'metre'
+    listenerPositionVar.Type = 'cartesian'
+    sourcePositionVar = rootgrp.createVariable('SourcePosition', 'f8', ('I', 'C'))
+    sourcePositionVar.Units = 'metre'
+    sourcePositionVar.Type = 'cartesian'
+    receiverPositionVar = rootgrp.createVariable('ReceiverPosition', 'f8', ('R', 'C', 'I'))
+    receiverPositionVar.Units = 'metre'
+    receiverPositionVar.Type = 'cartesian'
+    emitterPositionVar = rootgrp.createVariable('EmitterPosition', 'f8', ('E', 'C', 'M'))
+    emitterPositionVar.Units = 'metre'
+    emitterPositionVar.Type = 'cartesian'
+    rootgrp.close()
+
+    # Check
     simpleFreeFieldHRIR = SOFASimpleFreeFieldHRIR(path, 'r')
     assert simpleFreeFieldHRIR.isValid()
     simpleFreeFieldHRIR.close()

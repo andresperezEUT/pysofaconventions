@@ -367,25 +367,27 @@ def test_getVariablesAsDict():
 
     variableName1 = 'CoolVariable1'
     variableName2 = 'CoolVariable2'
+    variableValue1 = 1
+    variableValue2 = 2
 
     fd, path = tempfile.mkstemp()
     rootgrp = Dataset(path, 'w', format='NETCDF4')
-    rootgrp.createVariable(variableName1, 'f8', ())
-    rootgrp.createVariable(variableName2, 'f8', ())
+    rootgrp.createDimension('I', 1)
+    var1 = rootgrp.createVariable(variableName1, 'f8', ('I'))
+    var1[:] = variableValue1
+    var2 = rootgrp.createVariable(variableName2, 'f8', ('I'))
+    var2[:] = variableValue2
+
     variableDict = OrderedDict(rootgrp.variables)
+    # print(rootgrp.variables)
     rootgrp.close()
 
     sofafile = SOFAFile(path, 'r')
     # Assert variable names are equal
     for k1, k2 in zip(variableDict.keys(), sofafile.getVariablesAsDict().keys()):
         assert k1 == k2
-    # Assert variable instances are equal (through internal dict)
-    for v1, v2 in zip(variableDict.values(), sofafile.getVariablesAsDict().values()):
-        assert v1.__dict__ == v2.__dict__
-
 
     sofafile.close()
-
     os.remove(path)
 
 
@@ -1607,14 +1609,15 @@ def test_checkListenerVariables():
     listenerPositionVar.Type = 'cartesian'
     rootgrp.createVariable('ListenerUp', 'f8', ('I', 'C'))
     rootgrp.close()
-    raiseError('Missing Variable Attribute: ListenerUp.Units')
+    # v0.1.4, ListenerUp views and units are not mandatory!
+    # raiseError('Missing Variable Attribute: ListenerUp.Units')
 
-    # Missing ListenerUp.Coordinates
-    rootgrp = Dataset(path, 'a')
-    listenerUpVar = rootgrp.variables['ListenerUp']
-    listenerUpVar.Units = 'metre'
-    rootgrp.close()
-    raiseError('Missing Variable Attribute: ListenerUp.Coordinates')
+    # # Missing ListenerUp.Coordinates
+    # rootgrp = Dataset(path, 'a')
+    # listenerUpVar = rootgrp.variables['ListenerUp']
+    # listenerUpVar.Units = 'metre'
+    # rootgrp.close()
+    # raiseError('Missing Variable Attribute: ListenerUp.Coordinates')
 
     # Add ListenerView, missing Units
     rootgrp = Dataset(path, 'a')
