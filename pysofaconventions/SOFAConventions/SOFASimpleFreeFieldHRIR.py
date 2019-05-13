@@ -52,7 +52,8 @@ class SOFASimpleFreeFieldHRIR(SOFAFile):
         - 'RoomType' == 'free field'
         - Mandatory attribute 'ListenerShortName'
         - Mandatory attribute 'DatabaseName'
-        - E == 1
+        - E == 1 (single emitter)
+        - R == 2 (two ears)
 
         :return:    Boolean
         :raises:    SOFAWarning with error description, in case
@@ -90,6 +91,11 @@ class SOFASimpleFreeFieldHRIR(SOFAFile):
         if not self.getDimensionSize('E') == 1:
             warnings.warn('Number of emitters (E) should be 1, got '
                           +str(self.getDimensionSize('E')), SOFAWarning)
+            return False
+
+        if not self.getDimensionSize('R') == 2:
+            warnings.warn('Number of receivers (R) should be 2, got '
+                          +str(self.getDimensionSize('R')), SOFAWarning)
             return False
 
         return True
