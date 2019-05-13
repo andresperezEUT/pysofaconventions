@@ -81,7 +81,7 @@ def test_isValid():
     rootgrp.AuthorContact = 'andres.perez@eurecat.org'
     rootgrp.Organization = 'Eurecat - UPF'
     rootgrp.License = 'WTFPL - Do What the Fuck You Want to Public License'
-    rootgrp.DataType = 'FIR'
+    rootgrp.DataType = 'FIRE'
     rootgrp.RoomType = 'reverberant'
     rootgrp.DateCreated = time.ctime(time.time())
     rootgrp.DateModified = time.ctime(time.time())
@@ -96,8 +96,8 @@ def test_isValid():
     # Variables
     sr = rootgrp.createVariable('Data.SamplingRate', 'f8', ('I',))
     sr.Units = 'hertz'
-    rootgrp.createVariable('Data.Delay', 'f8', ('M', 'R'))
-    rootgrp.createVariable('Data.IR', 'f8', ('M', 'R', 'N'))
+    rootgrp.createVariable('Data.Delay', 'f8', ('M', 'R', 'E'))
+    rootgrp.createVariable('Data.IR', 'f8', ('M', 'R', 'E', 'N'))
     listenerPositionVar = rootgrp.createVariable('ListenerPosition', 'f8', ('I', 'C'))
     listenerPositionVar.Units = 'metre'
     listenerPositionVar.Type = 'cartesian'
@@ -113,17 +113,6 @@ def test_isValid():
     rootgrp.close()
 
     ## Specific validity
-
-    # Data type should be FIRE
-    raiseWarning('DataType is not FIRE')
-    # Adjust data type and required variables to change
-    rootgrp = Dataset(path, 'a')
-    rootgrp.DataType = 'FIRE'
-    rootgrp.renameVariable('Data.Delay',"OLD_Data.Delay")
-    rootgrp.createVariable('Data.Delay', 'f8', ('M', 'R', 'E'))
-    rootgrp.renameVariable('Data.IR','OLD_Data.IR')
-    rootgrp.createVariable('Data.IR', 'f8', ('M', 'R', 'E', 'N'))
-    rootgrp.close()
 
     # SOFAConventions should be AmbisonicsDRIR
     raiseWarning('SOFAConventions is not AmbisonicsDRIR')
@@ -178,6 +167,54 @@ def test_isValid():
     assert ambisonicsDRIR.isValid()
     ambisonicsDRIR.close()
     os.remove(path)
+
+
+    # Test separately the data type (renaming it on the fly might crash the netcdf4)
+    rootgrp = Dataset(path, 'w', format='NETCDF4')
+    # Attributes
+    rootgrp.Conventions = 'SOFA'
+    rootgrp.Version = '1.0'
+    rootgrp.SOFAConventions = 'GeneralFIR'
+    rootgrp.SOFAConventionsVersion = '0.2'
+    rootgrp.APIName = 'pysofaconventions'
+    rootgrp.APIVersion = '0.1'
+    rootgrp.APIVersion = '0.1'
+    rootgrp.AuthorContact = 'andres.perez@eurecat.org'
+    rootgrp.Organization = 'Eurecat - UPF'
+    rootgrp.License = 'WTFPL - Do What the Fuck You Want to Public License'
+    rootgrp.DataType = 'FIR'
+    rootgrp.RoomType = 'reverberant'
+    rootgrp.DateCreated = time.ctime(time.time())
+    rootgrp.DateModified = time.ctime(time.time())
+    rootgrp.Title = 'testpysofaconventions'
+    # Dimensions
+    rootgrp.createDimension('I', 1)
+    rootgrp.createDimension('N', 2)
+    rootgrp.createDimension('C', 3)
+    rootgrp.createDimension('M', 4)
+    rootgrp.createDimension('R', 5)
+    rootgrp.createDimension('E', 6)
+    # Variables
+    sr = rootgrp.createVariable('Data.SamplingRate', 'f8', ('I',))
+    sr.Units = 'hertz'
+    rootgrp.createVariable('Data.Delay', 'f8', ('M', 'R'))
+    rootgrp.createVariable('Data.IR', 'f8', ('M', 'R', 'N'))
+    listenerPositionVar = rootgrp.createVariable('ListenerPosition', 'f8', ('I', 'C'))
+    listenerPositionVar.Units = 'metre'
+    listenerPositionVar.Type = 'cartesian'
+    sourcePositionVar = rootgrp.createVariable('SourcePosition', 'f8', ('I', 'C'))
+    sourcePositionVar.Units = 'metre'
+    sourcePositionVar.Type = 'cartesian'
+    receiverPositionVar = rootgrp.createVariable('ReceiverPosition', 'f8', ('R', 'C', 'I'))
+    receiverPositionVar.Units = 'metre'
+    receiverPositionVar.Type = 'cartesian'
+    emitterPositionVar = rootgrp.createVariable('EmitterPosition', 'f8', ('E', 'C', 'M'))
+    emitterPositionVar.Units = 'metre'
+    emitterPositionVar.Type = 'cartesian'
+    rootgrp.close()
+
+    # Data type should be FIRE
+    raiseWarning('DataType is not FIRE')
 
 
 
