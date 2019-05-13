@@ -49,3 +49,4 @@ Check the /examples folder to see some reference implementations.
 Version 0.1.4, 13/05/2019
 - ListenerUp.Units and ListenerUp.Coordinates are not mandatory
 - SimpleFreeFieldHRIR: mandatory R=2
+- Updated to netCDF4-1.5.1.2
