@@ -677,11 +677,7 @@ class SOFAFile(object):
 
         if self.hasListenerUp():
             listenerUp = self.getVariableInstance('ListenerUp')
-            units, coordinates = self.getPositionVariableInfo('ListenerUp')
-            if units is None:
-                raise SOFAError('Missing Variable Attribute: ListenerUp.Units')
-            if coordinates is None:
-                raise SOFAError('Missing Variable Attribute: ListenerUp.Coordinates')
+            # By AES69-2015 specs, ListenerUp units and coordinates are not mandatory!
         else:
             listenerUp = None
 
