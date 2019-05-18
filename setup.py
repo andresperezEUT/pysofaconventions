@@ -1,6 +1,6 @@
-from setuptools import setup, find_packages
-import pysofaconventions.SOFAAPI
+from setuptools import find_packages, setup
 
+import pysofaconventions.SOFAAPI
 
 setup(
     name='pysofaconventions',
@@ -23,7 +23,6 @@ setup(
             "License :: OSI Approved :: BSD License",
             "Operating System :: OS Independent",
             "Programming Language :: Python",
-            "Development Status :: 3 - Alpha",
             "Intended Audience :: Developers",
             "Intended Audience :: Science/Research",
             "Topic :: Multimedia :: Sound/Audio :: Analysis",
@@ -34,6 +33,7 @@ setup(
             "Programming Language :: Python :: 3.4",
             "Programming Language :: Python :: 3.5",
             "Programming Language :: Python :: 3.6",
+            "Programming Language :: Python :: 3.7",
         ],
     install_requires=[
         'netCDF4'

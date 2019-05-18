@@ -46,6 +46,10 @@ Check the /examples folder to see some reference implementations.
 
 ## changelog
 
+Version 0.1.5, 18/05/2019
+- SourceUp.Units and SourceUp.Coordinates are not mandatory
+- SingleRoomDRIR: ListenerView.Units and SourceView.Units are not mandatory
+
 Version 0.1.4, 13/05/2019
 - ListenerUp.Units and ListenerUp.Coordinates are not mandatory
 - SimpleFreeFieldHRIR: mandatory R=2
