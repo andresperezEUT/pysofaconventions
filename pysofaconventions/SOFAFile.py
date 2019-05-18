@@ -913,7 +913,7 @@ class SOFAFile(object):
             raise SOFAError('Incorrect Data.SamplingRate dimensions: ' + str(self.getVariableShape(samplingRate.name))
                             + '. Expected [I] or [R]')
 
-        # Data.SamplingRate should have Units attribute in Hertzs
+        # Data.SamplingRate should have Units attribute in Hertz
         samplingRateUnits = SOFANetCDFFile.getVariableAttributeFromInstance(samplingRate,'Units')
 
         if samplingRateUnits is None:
@@ -971,7 +971,7 @@ class SOFAFile(object):
             raise SOFAError('Incorrect Data.SamplingRate dimensions: ' + str(self.getVariableShape(samplingRate.name))
                             + '. Expected [I] or [R]')
 
-        # Data.SamplingRate should have Units attribute in Hertzs
+        # Data.SamplingRate should have Units attribute in Hertz
         samplingRateUnits = SOFANetCDFFile.getVariableAttributeFromInstance(samplingRate,'Units')
 
         if samplingRateUnits is None:
@@ -1029,7 +1029,7 @@ class SOFAFile(object):
                 'Incorrect Data.SamplingRate dimensions: ' + str(self.getVariableShape(samplingRate.name))
                 + '. Expected [I] or [R]')
 
-        # Data.SamplingRate should have Units attribute in Hertzs
+        # Data.SamplingRate should have Units attribute in Hertz
         samplingRateUnits = SOFANetCDFFile.getVariableAttributeFromInstance(samplingRate, 'Units')
 
         if samplingRateUnits is None:
@@ -1055,7 +1055,7 @@ class SOFAFile(object):
         """
         Data.Real [M,R,N]
         Data.Imag [M,R,N]
-        N  [N] (units:hertz, longname)
+        N  [N] (units:Hertz, longname)
 
         :raises:    SOFAError if Data is inconsistent
         """
