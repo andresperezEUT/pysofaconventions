@@ -684,7 +684,8 @@ class SOFAFile(object):
         if self.hasListenerView():
             listenerView = self.getVariableInstance('ListenerView')
             units, coordinates = self.getPositionVariableInfo('ListenerView')
-            if units is None:
+            # By AES69-2015 SingleRoomDRIR specs, ListenerUp units is not mandatory!
+            if units is None and self.getGlobalAttributeValue('SOFAConventions') != 'SingleRoomDRIR':
                 raise SOFAError('Missing Variable Attribute: ListenerView.Units')
             if coordinates is None:
                 raise SOFAError('Missing Variable Attribute: ListenerView.Coordinates')
@@ -724,18 +725,15 @@ class SOFAFile(object):
 
         if self.hasSourceUp():
             sourceUp = self.getVariableInstance('SourceUp')
-            units, coordinates = self.getPositionVariableInfo('SourceUp')
-            if units is None:
-                raise SOFAError('Missing Variable Attribute: SourceUp.Units')
-            if coordinates is None:
-                raise SOFAError('Missing Variable Attribute: SourceUp.Coordinates')
+            # By AES69-2015 specs, SourceUp units and coordinates are not mandatory!
         else:
             sourceUp = None
 
         if self.hasSourceView():
             sourceView = self.getVariableInstance('SourceView')
             units, coordinates = self.getPositionVariableInfo('SourceView')
-            if units is None:
+            # By AES69-2015 SingleRoomDRIR specs, ListenerUp units is not mandatory!
+            if units is None and self.getGlobalAttributeValue('SOFAConventions') != 'SingleRoomDRIR':
                 raise SOFAError('Missing Variable Attribute: SourceView.Units')
             if coordinates is None:
                 raise SOFAError('Missing Variable Attribute: SourceView.Coordinates')
