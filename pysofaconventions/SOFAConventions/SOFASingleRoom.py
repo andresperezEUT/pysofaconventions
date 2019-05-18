@@ -35,11 +35,12 @@
 #
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
-from pysofaconventions import SOFAFile, SOFAWarning
 import warnings
 
-class SOFASingleRoomDRIR(SOFAFile):
+from pysofaconventions import SOFAFile, SOFAWarning
 
+
+class SOFASingleRoomDRIR(SOFAFile):
     conventionVersionMajor = 0
     conventionVersionMinor = 3
 
@@ -62,38 +63,35 @@ class SOFASingleRoomDRIR(SOFAFile):
         if not SOFAFile.isValid(self):
             return False
 
-
         # Ensure specifics of this convention
-
-        ## Attributes
+        # # Attributes
         if not self.isFIRDataType():
             warnings.warn('DataType is not FIR', SOFAWarning)
             return False
 
         if not self.getGlobalAttributeValue('SOFAConventions') == 'SingleRoomDRIR':
-            warnings.warn('SOFAConventions is not SingleRoomDRIR', SOFAWarning)
+            warnings.warn('SOFAConventions is not "SingleRoomDRIR", got: "{}"'.format(
+                self.getGlobalAttributeValue('SOFAConventions')), SOFAWarning)
             return False
 
         if not self.getGlobalAttributeValue('RoomType') == 'reverberant':
-            warnings.warn('RoomType is not "reverberant, got: "'
-                          +self.getGlobalAttributeValue('RoomType'), SOFAWarning)
+            warnings.warn('RoomType is not "reverberant", got: "{}"'.format(self.getGlobalAttributeValue('RoomType')),
+                          SOFAWarning)
             return False
 
         if not self.hasGlobalAttribute('RoomDescription'):
             warnings.warn('Missing required Global Attribute "RoomDescription"', SOFAWarning)
             return False
 
-
-        ##  Variables
+        # # Variables
         if not self.hasListenerUp() or not self.hasListenerView():
-            warnings.warn('Mandatory Variables ListenerUp and ListenerView not found', SOFAWarning)
+            warnings.warn('Missing required Variables "ListenerUp" and "ListenerView"', SOFAWarning)
             return False
 
-
-        ## Dimensions
+        # # Dimensions
         if not self.getDimensionSize('E') == 1:
-            warnings.warn('Number of emitters (E) should be 1, got '
-                          +str(self.getDimensionSize('E')), SOFAWarning)
+            warnings.warn('Number of emitters (E) is not "1", got "{}"'.format(self.getDimensionSize('E')),
+                          SOFAWarning)
             return False
 
         return True

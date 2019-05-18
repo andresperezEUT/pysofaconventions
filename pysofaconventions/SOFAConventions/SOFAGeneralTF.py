@@ -35,11 +35,12 @@
 #
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
-from pysofaconventions import SOFAFile, SOFAWarning
 import warnings
 
-class SOFAGeneralTF(SOFAFile):
+from pysofaconventions import SOFAFile, SOFAWarning
 
+
+class SOFAGeneralTF(SOFAFile):
     conventionVersionMajor = 1
     conventionVersionMinor = 0
 
@@ -58,16 +59,16 @@ class SOFAGeneralTF(SOFAFile):
         if not SOFAFile.isValid(self):
             return False
 
-
         # Ensure specifics of this convention
 
-        ## Attributes
+        # # Attributes
         if not self.isTFDataType():
             warnings.warn('DataType is not TF', SOFAWarning)
             return False
 
         if not self.getGlobalAttributeValue('SOFAConventions') == 'GeneralTF':
-            warnings.warn('SOFAConventions is not GeneralTF', SOFAWarning)
+            warnings.warn('SOFAConventions is not "GeneralTF", got: "{}"'.format(
+                self.getGlobalAttributeValue('SOFAConventions')), SOFAWarning)
             return False
 
         return True

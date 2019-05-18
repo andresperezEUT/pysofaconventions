@@ -35,6 +35,7 @@
 #
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
+
 class SOFAError(Exception):
-    '''The root SOFA exception class'''
+    """The root SOFA exception class"""
     pass

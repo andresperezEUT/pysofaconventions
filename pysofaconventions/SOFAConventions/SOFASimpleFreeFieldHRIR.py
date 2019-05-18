@@ -35,11 +35,12 @@
 #
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
-from pysofaconventions import SOFAFile, SOFAWarning
 import warnings
 
-class SOFASimpleFreeFieldHRIR(SOFAFile):
+from pysofaconventions import SOFAFile, SOFAWarning
 
+
+class SOFASimpleFreeFieldHRIR(SOFAFile):
     conventionVersionMajor = 1
     conventionVersionMinor = 0
 
@@ -63,20 +64,21 @@ class SOFASimpleFreeFieldHRIR(SOFAFile):
         if not SOFAFile.isValid(self):
             return False
 
-
         # Ensure specifics of this convention
 
-        ## Attributes
+        # # Attributes
         if not self.isFIRDataType():
             warnings.warn('DataType is not FIR', SOFAWarning)
             return False
 
         if not self.getGlobalAttributeValue('SOFAConventions') == 'SimpleFreeFieldHRIR':
-            warnings.warn('SOFAConventions is not SimpleFreeFieldHRIR', SOFAWarning)
+            warnings.warn('SOFAConventions is not "SimpleFreeFieldHRIR", got: "{}"'.format(
+                self.getGlobalAttributeValue('SOFAConventions')), SOFAWarning)
             return False
 
         if not self.getGlobalAttributeValue('RoomType') == 'free field':
-            warnings.warn('RoomType is not "free field"', SOFAWarning)
+            warnings.warn('RoomType is not "free field", got: "{}"'.format(self.getGlobalAttributeValue('RoomType')),
+                          SOFAWarning)
             return False
 
         if not self.hasGlobalAttribute('ListenerShortName'):
@@ -87,15 +89,15 @@ class SOFASimpleFreeFieldHRIR(SOFAFile):
             warnings.warn('Missing required Global Attribute "DatabaseName"', SOFAWarning)
             return False
 
-        ## Dimensions
+        # # Dimensions
         if not self.getDimensionSize('E') == 1:
-            warnings.warn('Number of emitters (E) should be 1, got '
-                          +str(self.getDimensionSize('E')), SOFAWarning)
+            warnings.warn('Number of emitters (E) is not "1", got "{}"'.format(self.getDimensionSize('E')),
+                          SOFAWarning)
             return False
 
         if not self.getDimensionSize('R') == 2:
-            warnings.warn('Number of receivers (R) should be 2, got '
-                          +str(self.getDimensionSize('R')), SOFAWarning)
+            warnings.warn('Number of receivers (R) is not "2", got "{}"'.format(self.getDimensionSize('R')),
+                          SOFAWarning)
             return False
 
         return True

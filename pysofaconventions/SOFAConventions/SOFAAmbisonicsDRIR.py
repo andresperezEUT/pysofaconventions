@@ -35,11 +35,12 @@
 #
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
-from pysofaconventions import SOFAFile, SOFAWarning
 import warnings
 
-class SOFAAmbisonicsDRIR(SOFAFile):
+from pysofaconventions import SOFAFile, SOFAWarning
 
+
+class SOFAAmbisonicsDRIR(SOFAFile):
     conventionVersionMajor = 0
     conventionVersionMinor = 2
 
@@ -62,39 +63,37 @@ class SOFAAmbisonicsDRIR(SOFAFile):
         if not SOFAFile.isValid(self):
             return False
 
-
         # Ensure specifics of this convention
 
-        ## Attributes
+        # # Attributes
         if not self.isFIREDataType():
             warnings.warn('DataType is not FIRE', SOFAWarning)
             return False
 
         if not self.getGlobalAttributeValue('SOFAConventions') == 'AmbisonicsDRIR':
-            warnings.warn('SOFAConventions is not AmbisonicsDRIR', SOFAWarning)
+            warnings.warn('SOFAConventions is not "AmbisonicsDRIR", got: "{}"'.format(
+                self.getGlobalAttributeValue('SOFAConventions')), SOFAWarning)
             return False
 
         if 'AmbisonicsOrder' not in self.getGlobalAttributesAsDict():
-            warnings.warn('Global Attribute AmbisonicsOrder not found', SOFAWarning)
+            warnings.warn('Missing required Global Attribute "AmbisonicsOrder"', SOFAWarning)
             return False
 
-        if self.getVariableAttributeValue('Data.IR','ChannelOrdering') is None:
-            warnings.warn('Data.IR Attribute ChannelOrdering not found', SOFAWarning)
+        if self.getVariableAttributeValue('Data.IR', 'ChannelOrdering') is None:
+            warnings.warn('Missing required Data.IR Attribute "ChannelOrdering"', SOFAWarning)
             return False
 
-        if self.getVariableAttributeValue('Data.IR','Normalization') is None:
-            warnings.warn('Data.IR Attribute Normalization not found', SOFAWarning)
+        if self.getVariableAttributeValue('Data.IR', 'Normalization') is None:
+            warnings.warn('Missing required Data.IR Attribute "Normalization"', SOFAWarning)
             return False
 
-
-        ##  Variables
+        # #  Variables
         if not self.hasListenerUp() or not self.hasListenerView():
-            warnings.warn('Mandatory Variables ListenerUp and ListenerView not found', SOFAWarning)
+            warnings.warn('Missing required Variables "ListenerUp" and "ListenerView"', SOFAWarning)
             return False
 
         if not self.hasSourceUp() or not self.hasSourceView():
-            warnings.warn('Mandatory Variables SourceUp and SourceView not found', SOFAWarning)
+            warnings.warn('Missing required Variables "SourceUp" and "SourceView"', SOFAWarning)
             return False
-
 
         return True

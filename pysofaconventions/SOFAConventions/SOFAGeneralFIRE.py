@@ -35,11 +35,12 @@
 #
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
-from pysofaconventions import SOFAFile, SOFAWarning
 import warnings
 
-class SOFAGeneralFIRE(SOFAFile):
+from pysofaconventions import SOFAFile, SOFAWarning
 
+
+class SOFAGeneralFIRE(SOFAFile):
     conventionVersionMajor = 1
     conventionVersionMinor = 0
 
@@ -58,16 +59,16 @@ class SOFAGeneralFIRE(SOFAFile):
         if not SOFAFile.isValid(self):
             return False
 
-
         # Ensure specifics of this convention
 
-        ## Attributes
+        # # Attributes
         if not self.isFIREDataType():
             warnings.warn('DataType is not FIRE', SOFAWarning)
             return False
 
         if not self.getGlobalAttributeValue('SOFAConventions') == 'GeneralFIRE':
-            warnings.warn('SOFAConventions is not GeneralFIRE', SOFAWarning)
+            warnings.warn('SOFAConventions is not "GeneralFIRE", got: "{}"'.format(
+                self.getGlobalAttributeValue('SOFAConventions')), SOFAWarning)
             return False
 
         return True

@@ -35,8 +35,8 @@
 #
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
-class SOFAVersion:
 
+class SOFAVersion:
     # Version of pysofaconventions
     SOFAVersionMajor = 0
     SOFAVersionMinor = 1

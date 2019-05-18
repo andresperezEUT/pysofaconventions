@@ -35,6 +35,7 @@
 #
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
+
 class SOFAWarning(UserWarning):
-    '''The root SOFA warning class'''
+    """The root SOFA warning class"""
     pass

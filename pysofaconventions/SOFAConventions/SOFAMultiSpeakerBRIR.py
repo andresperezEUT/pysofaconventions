@@ -35,11 +35,12 @@
 #
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
-from pysofaconventions import SOFAFile, SOFAWarning
 import warnings
 
-class SOFAMultiSpeakerBRIR(SOFAFile):
+from pysofaconventions import SOFAFile, SOFAWarning
 
+
+class SOFAMultiSpeakerBRIR(SOFAFile):
     conventionVersionMajor = 0
     conventionVersionMinor = 3
 
@@ -59,21 +60,20 @@ class SOFAMultiSpeakerBRIR(SOFAFile):
         if not SOFAFile.isValid(self):
             return False
 
-
         # Ensure specifics of this convention
 
-        ## Attributes
+        # # Attributes
         if not self.isFIREDataType():
             warnings.warn('DataType is not FIRE', SOFAWarning)
             return False
 
         if not self.getGlobalAttributeValue('SOFAConventions') == 'MultiSpeakerBRIR':
-            warnings.warn('SOFAConventions is not MultiSpeakerBRIR', SOFAWarning)
+            warnings.warn('SOFAConventions is not "MultiSpeakerBRIR", got: "{}"'.format(
+                self.getGlobalAttributeValue('SOFAConventions')), SOFAWarning)
             return False
 
         if not self.hasGlobalAttribute('DatabaseName'):
             warnings.warn('Missing required Global Attribute "DatabaseName"', SOFAWarning)
             return False
-
 
         return True

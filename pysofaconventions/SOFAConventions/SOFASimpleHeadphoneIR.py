@@ -35,11 +35,12 @@
 #
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
-from pysofaconventions import SOFAFile, SOFAWarning
 import warnings
 
-class SOFASimpleHeadphoneIR(SOFAFile):
+from pysofaconventions import SOFAFile, SOFAWarning
 
+
+class SOFASimpleHeadphoneIR(SOFAFile):
     conventionVersionMajor = 0
     conventionVersionMinor = 2
 
@@ -68,20 +69,21 @@ class SOFASimpleHeadphoneIR(SOFAFile):
         if not SOFAFile.isValid(self):
             return False
 
-
         # Ensure specifics of this convention
 
-        ## Attributes
+        # # Attributes
         if not self.isFIRDataType():
             warnings.warn('DataType is not FIR', SOFAWarning)
             return False
 
         if not self.getGlobalAttributeValue('SOFAConventions') == 'SimpleHeadphoneIR':
-            warnings.warn('SOFAConventions is not SimpleHeadphoneIR', SOFAWarning)
+            warnings.warn('SOFAConventions is not "SimpleHeadphoneIR", got: "{}"'.format(
+                self.getGlobalAttributeValue('SOFAConventions')), SOFAWarning)
             return False
 
         if not self.getGlobalAttributeValue('RoomType') == 'free field':
-            warnings.warn('RoomType is not "free field"', SOFAWarning)
+            warnings.warn('RoomType is not "free field", got: "{}"'.format(self.getGlobalAttributeValue('RoomType')),
+                          SOFAWarning)
             return False
 
         if not self.hasGlobalAttribute('ListenerShortName'):
@@ -116,12 +118,10 @@ class SOFASimpleHeadphoneIR(SOFAFile):
             warnings.warn('Missing required Global Attribute "SourceURI"', SOFAWarning)
             return False
 
-        ## Dimensions
+        # # Dimensions
         if not self.getDimensionSize('E') == self.getDimensionSize('R'):
-            warnings.warn('Number of emitters (E) and number of receivers (R) should match, got  '
-                          +str(self.getDimensionSize('E')) + ","
-                          +str(self.getDimensionSize('R')), SOFAWarning)
+            warnings.warn('Number of emitters (E) and number of receivers (R) do not match, got "{}" and "{}"'.format(
+                self.getDimensionSize('E'), self.getDimensionSize('R')), SOFAWarning)
             return False
-
 
         return True

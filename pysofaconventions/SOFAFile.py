@@ -35,18 +35,21 @@
 #
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
-from .SOFAError import SOFAError
-from .SOFAWarning import SOFAWarning
-from .SOFAAttributes import SOFAAttributes
-from .SOFANcFile import SOFANetCDFFile
-from .SOFAListener import SOFAListener
-from .SOFASource import SOFASource
-from .SOFAReceiver import SOFAReceiver
-from .SOFAEmitter import SOFAEmitter
-from .SOFAUnits import SOFAUnits
-from .SOFAPositionVariable import SOFAPositionVariable
 import warnings
 
+from .SOFAAttributes import SOFAAttributes
+from .SOFAEmitter import SOFAEmitter
+from .SOFAError import SOFAError
+from .SOFAListener import SOFAListener
+from .SOFANcFile import SOFANetCDFFile
+from .SOFAPositionVariable import SOFAPositionVariable
+from .SOFAReceiver import SOFAReceiver
+from .SOFASource import SOFASource
+from .SOFAUnits import SOFAUnits
+from .SOFAWarning import SOFAWarning
+
+
+# noinspection PyPep8Naming
 class SOFAFile(object):
 
     conventionVersionMajor = None
@@ -56,9 +59,7 @@ class SOFAFile(object):
     def getConventionVersion(cls):
         return str(cls.conventionVersionMajor) + "." + str(cls.conventionVersionMinor)
 
-    ###### INIT
-
-
+    # # INIT
 
     def __init__(self,path,mode):
         self.ncfile = SOFANetCDFFile(path,mode)
@@ -258,9 +259,6 @@ class SOFAFile(object):
         except SOFAError:
             raise SOFAError('Variable not found: ' + varName )
 
-
-
-
     def getPositionVariableInfo(self,varName):
         """
         Get Units and Coordinates of a position variable
@@ -277,7 +275,7 @@ class SOFAFile(object):
             raise SOFAError('Variable not found: ' + varName)
 
 
-    ################# GET DATA!
+    # # GET DATA
 
     def hasListenerView(self):
         """
@@ -421,7 +419,6 @@ class SOFAFile(object):
         :return: a Tuple (units,coordinates), with value None if not found
         """
         return self.getPositionVariableInfo('EmitterView')
-
 
 
     def getListenerPositionValues(self):
@@ -591,7 +588,7 @@ class SOFAFile(object):
             print("- " + var + " = " + str(self.getVariableShape(var)))
 
 
-    ##### check stuff
+    # # check stuff
 
     def checkSOFARequiredAttributes(self):
         """
@@ -619,7 +616,6 @@ class SOFAFile(object):
             raise SOFAError('File convention is not SOFA: ' + self.getGlobalAttributeValue('Conventions'))
 
         return True
-
 
     def checkSOFADimensionsAreValid(self):
         """
@@ -666,7 +662,6 @@ class SOFAFile(object):
         except SOFAError:
             raise SOFAError('Missing Variable: ListenerPosition')
 
-
         # Check that Listener is consistent
         listenerPosition = self.getVariableInstance('ListenerPosition')
         units, coordinates =  self.getPositionVariableInfo('ListenerPosition')
@@ -698,7 +693,6 @@ class SOFAFile(object):
                                     self.getDimensionSize('M'))
 
         return True
-
 
     def checkSourceVariables(self):
         """
@@ -746,7 +740,6 @@ class SOFAFile(object):
                                   self.getDimensionSize('M'))
 
         return True
-
 
     def checkReceiverVariables(self):
         """
@@ -797,7 +790,6 @@ class SOFAFile(object):
                                     self.getDimensionSize('I'),
                                     self.getDimensionSize('M'))
         return True
-
 
     def checkEmitterVariables(self):
         """
@@ -901,7 +893,6 @@ class SOFAFile(object):
         i = self.getDimensionSize('I')
         r = self.getDimensionSize('R')
 
-
         # Data.IR variable should exist and have dimension [M,R,N]
         try:
             ir = self.getVariableInstance('Data.IR')
@@ -911,7 +902,6 @@ class SOFAFile(object):
         if not SOFANetCDFFile.variableHasDimensions(ir, (m, r, n)):
             raise SOFAError('Incorrect Data.IR dimensions: '+str(self.getVariableShape(ir.name))
                             + '. Expected [M,R,N]')
-
 
         # Data.SamplingRate variable should exist and have dimension [I] or [R]
         try:
@@ -923,7 +913,6 @@ class SOFAFile(object):
             raise SOFAError('Incorrect Data.SamplingRate dimensions: ' + str(self.getVariableShape(samplingRate.name))
                             + '. Expected [I] or [R]')
 
-
         # Data.SamplingRate should have Units attribute in Hertzs
         samplingRateUnits = SOFANetCDFFile.getVariableAttributeFromInstance(samplingRate,'Units')
 
@@ -932,7 +921,6 @@ class SOFAFile(object):
 
         if not SOFAUnits.isFrequencyUnit(samplingRateUnits):
             raise SOFAError('Attribute Data.SamplingRate.Units is not a frequency unit: '+samplingRateUnits)
-
 
         # Data.Delay should exist and have dimension [I,R] or [M,R]
         try:
@@ -973,7 +961,6 @@ class SOFAFile(object):
             raise SOFAError('Incorrect Data.IR dimensions: '+str(self.getVariableShape(ir.name))
                             + '. Expected [M,R,E,N]')
 
-
         # Data.SamplingRate variable should exist and have dimension [I] or [R]
         try:
             samplingRate = self.getVariableInstance('Data.SamplingRate')
@@ -984,7 +971,6 @@ class SOFAFile(object):
             raise SOFAError('Incorrect Data.SamplingRate dimensions: ' + str(self.getVariableShape(samplingRate.name))
                             + '. Expected [I] or [R]')
 
-
         # Data.SamplingRate should have Units attribute in Hertzs
         samplingRateUnits = SOFANetCDFFile.getVariableAttributeFromInstance(samplingRate,'Units')
 
@@ -993,7 +979,6 @@ class SOFAFile(object):
 
         if not SOFAUnits.isFrequencyUnit(samplingRateUnits):
             raise SOFAError('Attribute Data.SamplingRate.Units is not a frequency unit: '+samplingRateUnits)
-
 
         # Data.Delay should exist and have dimension [I,R,E] or [M,R,E]
         try:
@@ -1006,7 +991,6 @@ class SOFAFile(object):
                             + '. Expected [I,R,E] or [M,R,E]')
 
         return True
-
 
 
     def checkSOSDataType(self):
@@ -1071,7 +1055,7 @@ class SOFAFile(object):
         """
         Data.Real [M,R,N]
         Data.Imag [M,R,N]
-        N  [N] (units:hertzs, longname)
+        N  [N] (units:hertz, longname)
 
         :raises:    SOFAError if Data is inconsistent
         """
@@ -1114,7 +1098,7 @@ class SOFAFile(object):
                             + str(self.getVariableShape(varN.name))
                             + '. Expected [N]')
 
-        # N should have Units attribute in Hertzs
+        # N should have Units attribute in Hertz
         varNUnits = SOFANetCDFFile.getVariableAttributeFromInstance(varN, 'Units')
 
         if varNUnits is None:

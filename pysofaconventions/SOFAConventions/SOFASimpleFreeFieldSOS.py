@@ -35,11 +35,12 @@
 #
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
-from pysofaconventions import SOFAFile, SOFAWarning
 import warnings
 
-class SOFASimpleFreeFieldSOS(SOFAFile):
+from pysofaconventions import SOFAFile, SOFAWarning
 
+
+class SOFASimpleFreeFieldSOS(SOFAFile):
     conventionVersionMajor = 1
     conventionVersionMinor = 0
 
@@ -62,36 +63,36 @@ class SOFASimpleFreeFieldSOS(SOFAFile):
         if not SOFAFile.isValid(self):
             return False
 
-
         # Ensure specifics of this convention
 
-        ## Attributes
+        # # Attributes
         if not self.isSOSDataType():
             warnings.warn('DataType is not SOS', SOFAWarning)
             return False
 
         if not self.getGlobalAttributeValue('SOFAConventions') == 'SimpleFreeFieldSOS':
-            warnings.warn('SOFAConventions is not SimpleFreeFieldSOS', SOFAWarning)
+            warnings.warn('SOFAConventions is not "SimpleFreeFieldSOS", got: "{}"'.format(
+                self.getGlobalAttributeValue('SOFAConventions')), SOFAWarning)
             return False
 
         if not self.getGlobalAttributeValue('RoomType') == 'free field':
-            warnings.warn('RoomType is not "free field"', SOFAWarning)
+            warnings.warn('RoomType is not "free field", got: "{}"'.format(self.getGlobalAttributeValue('RoomType')),
+                          SOFAWarning)
             return False
-
 
         if not self.hasGlobalAttribute('DatabaseName'):
             warnings.warn('Missing required Global Attribute "DatabaseName"', SOFAWarning)
             return False
 
-        ## Dimensions
+        # # Dimensions
         if not self.getDimensionSize('E') == 1:
-            warnings.warn('Number of emitters (E) should be 1, got '
-                          +str(self.getDimensionSize('E')), SOFAWarning)
+            warnings.warn('Number of emitters (E) is not "1", got "{}"'.format(self.getDimensionSize('E')),
+                          SOFAWarning)
             return False
 
         if not (self.getDimensionSize('N') % 6 == 0):
-            warnings.warn('Number of emitters (N) should be multiple of 6, got '
-                          +str(self.getDimensionSize('N')), SOFAWarning)
+            warnings.warn('Number of emitters (N) is not multiple of 6, got "{}"'.format(self.getDimensionSize('N')),
+                          SOFAWarning)
             return False
 
         return True
