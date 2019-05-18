@@ -6,4 +6,4 @@ from .SOFAMultiSpeakerBRIR import SOFAMultiSpeakerBRIR
 from .SOFASimpleFreeFieldHRIR import SOFASimpleFreeFieldHRIR
 from .SOFASimpleFreeFieldSOS import SOFASimpleFreeFieldSOS
 from .SOFASimpleHeadphoneIR import SOFASimpleHeadphoneIR
-from .SOFASingleRoom import SOFASingleRoomDRIR
+from .SOFASingleRoomDRIR import SOFASingleRoomDRIR

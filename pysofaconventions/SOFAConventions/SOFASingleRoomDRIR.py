@@ -29,7 +29,7 @@
 #
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 #
-#   @file   SOFASingleRoom.py
+#   @file   SOFASingleRoomDRIR.py
 #   @author Andrés Pérez-López
 #   @date   29/08/2018
 #
