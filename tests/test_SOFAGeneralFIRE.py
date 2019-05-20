@@ -115,7 +115,7 @@ def test_isValid():
     ## Specific validity
 
     # SOFAConventions should be GeneralFIRE
-    raiseWarning('SOFAConventions is not GeneralFIRE')
+    raiseWarning('SOFAConventions is not "GeneralFIRE", got: "GeneralFIR"')
     rootgrp = Dataset(path, 'a')
     rootgrp.SOFAConventions = 'GeneralFIRE'
     rootgrp.close()
@@ -171,7 +171,8 @@ def test_isValid():
     rootgrp.close()
 
     # Data type should be FIRE
-    raiseWarning('DataType is not FIRE')
+    raiseWarning('DataType is not "FIRE", got: "FIR"')
+
 
 
 

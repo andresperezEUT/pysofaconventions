@@ -115,13 +115,13 @@ def test_isValid():
     ## Specific validity
 
     # SOFAConventions should be SimpleFreeFieldHRIR
-    raiseWarning('SOFAConventions is not SimpleFreeFieldHRIR')
+    raiseWarning('SOFAConventions is not "SimpleFreeFieldHRIR", got: "GeneralFIRE"')
     rootgrp = Dataset(path, 'a')
     rootgrp.SOFAConventions = 'SimpleFreeFieldHRIR'
     rootgrp.close()
 
     # Global Attribute RoomType should be 'free field
-    raiseWarning('RoomType is not "free field"')
+    raiseWarning('RoomType is not "free field", got: "reverberant"')
     rootgrp = Dataset(path, 'a')
     rootgrp.RoomType = 'free field'
     rootgrp.close()
@@ -139,7 +139,7 @@ def test_isValid():
     rootgrp.close()
 
     # Dimension E should be 1
-    raiseWarning('Number of emitters (E) should be 1')
+    raiseWarning('Number of emitters (E) is not "1", got "6"')
     rootgrp = Dataset(path, 'a')
     rootgrp.renameDimension('E','OLD_E')
     rootgrp.createDimension('E',1)
@@ -150,7 +150,7 @@ def test_isValid():
     rootgrp.close()
 
     # Dimension R should be 2
-    raiseWarning('Number of receivers (R) should be 2')
+    raiseWarning('Number of receivers (R) is not "2", got "5"')
 
 
     # All right
@@ -254,4 +254,4 @@ def test_isValid():
     rootgrp.close()
 
     # Data type should be FIR
-    raiseWarning('DataType is not FIR')
+    raiseWarning('DataType is not "FIR", got: "FIRE"')

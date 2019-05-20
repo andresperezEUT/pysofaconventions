@@ -115,33 +115,33 @@ def test_isValid():
     ## Specific validity
 
     # SOFAConventions should be AmbisonicsDRIR
-    raiseWarning('SOFAConventions is not AmbisonicsDRIR')
+    raiseWarning('SOFAConventions is not "AmbisonicsDRIR", got: "GeneralFIR"')
     rootgrp = Dataset(path, 'a')
     rootgrp.SOFAConventions = 'AmbisonicsDRIR'
     rootgrp.close()
 
     # Required global attribute AmbisonicsOrder
-    raiseWarning('Global Attribute AmbisonicsOrder not found')
+    raiseWarning('Missing required Global Attribute "AmbisonicsOrder"')
     rootgrp = Dataset(path, 'a')
     rootgrp.AmbisonicsOrder = 1
     rootgrp.close()
 
     # Required attribute Data.IR:ChannelOrdering
-    raiseWarning('Data.IR Attribute ChannelOrdering not found')
+    raiseWarning('Missing required Data.IR Attribute "ChannelOrdering"')
     rootgrp = Dataset(path, 'a')
     dataIR = rootgrp.variables['Data.IR']
     dataIR.ChannelOrdering = 'fuma'
     rootgrp.close()
 
     # Required attribute Data.IR:Normalization
-    raiseWarning('Data.IR Attribute Normalization not found')
+    raiseWarning('Missing required Data.IR Attribute "Normalization"')
     rootgrp = Dataset(path, 'a')
     dataIR = rootgrp.variables['Data.IR']
     dataIR.Normalization = 'fuma'
     rootgrp.close()
 
     # Requiered variables ListenerUp and ListenerView
-    raiseWarning('Mandatory Variables ListenerUp and ListenerView not found')
+    raiseWarning('Missing required Variables "ListenerUp" and "ListenerView"')
     rootgrp = Dataset(path, 'a')
     up = rootgrp.createVariable('ListenerUp','f8',('I','C'))
     up.Units = 'metre'
@@ -152,7 +152,7 @@ def test_isValid():
     rootgrp.close()
 
     # Requiered variables SourceUp and SourceView
-    raiseWarning('Mandatory Variables SourceUp and SourceView not found')
+    raiseWarning('Missing required Variables "SourceUp" and "SourceView"')
     rootgrp = Dataset(path, 'a')
     up = rootgrp.createVariable('SourceUp','f8',('I','C'))
     up.Units = 'metre'
@@ -214,7 +214,7 @@ def test_isValid():
     rootgrp.close()
 
     # Data type should be FIRE
-    raiseWarning('DataType is not FIRE')
+    raiseWarning('DataType is not "FIRE", got: "FIR"')
 
 
 

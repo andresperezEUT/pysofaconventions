@@ -115,13 +115,13 @@ def test_isValid():
     ## Specific validity
 
     # SOFAConventions should be SimpleFreeFieldSOS
-    raiseWarning('SOFAConventions is not SimpleFreeFieldSOS')
+    raiseWarning('SOFAConventions is not "SimpleFreeFieldSOS", got: "GeneralFIRE"')
     rootgrp = Dataset(path, 'a')
     rootgrp.SOFAConventions = 'SimpleFreeFieldSOS'
     rootgrp.close()
 
     # Global Attribute RoomType should be 'free field
-    raiseWarning('RoomType is not "free field"')
+    raiseWarning('RoomType is not "free field", got: "reverberant"')
     rootgrp = Dataset(path, 'a')
     rootgrp.RoomType = 'free field'
     rootgrp.close()
@@ -133,7 +133,7 @@ def test_isValid():
     rootgrp.close()
 
     # Dimension E should be 1
-    raiseWarning('Number of emitters (E) should be 1')
+    raiseWarning('Number of emitters (E) is not "1", got "6"')
     rootgrp = Dataset(path, 'a')
     rootgrp.renameDimension('E','OLD_E')
     rootgrp.createDimension('E',1)
@@ -144,7 +144,7 @@ def test_isValid():
     rootgrp.close()
 
     # Dimension N should be multiple of 6
-    raiseWarning('Number of emitters (N) should be multiple of 6')
+    raiseWarning('Number of coefficients (N) is not multiple of "6", got "2"')
     rootgrp = Dataset(path, 'a')
     rootgrp.renameDimension('N','OLD_N')
     rootgrp.createDimension('N',12)
@@ -203,4 +203,4 @@ def test_isValid():
     rootgrp.close()
 
     # Data type should be SOS
-    raiseWarning('DataType is not SOS')
+    raiseWarning('DataType is not "SOS", got: "FIRE"')

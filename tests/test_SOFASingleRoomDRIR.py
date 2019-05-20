@@ -115,13 +115,13 @@ def test_isValid():
     ## Specific validity
 
     # SOFAConventions should be SingleRoomDRIR
-    raiseWarning('SOFAConventions is not SingleRoomDRIR')
+    raiseWarning('SOFAConventions is not "SingleRoomDRIR", got: "GeneralFIRE"')
     rootgrp = Dataset(path, 'a')
     rootgrp.SOFAConventions = 'SingleRoomDRIR'
     rootgrp.close()
 
     # Global Attribute RoomType should be 'reverberant'
-    raiseWarning('RoomType is not "reverberant')
+    raiseWarning('RoomType is not "reverberant", got: "free field"')
     rootgrp = Dataset(path, 'a')
     rootgrp.RoomType = 'reverberant'
     rootgrp.close()
@@ -133,7 +133,7 @@ def test_isValid():
     rootgrp.close()
 
     # Requiered variables ListenerUp and ListenerView
-    raiseWarning('Mandatory Variables ListenerUp and ListenerView not found')
+    raiseWarning('Missing required Variables "ListenerUp" and "ListenerView"')
     rootgrp = Dataset(path, 'a')
     up = rootgrp.createVariable('ListenerUp','f8',('I','C'))
     up.Units = 'metre'
@@ -144,7 +144,7 @@ def test_isValid():
     rootgrp.close()
 
     # Dimension E should be 1
-    raiseWarning('Number of emitters (E) should be 1')
+    raiseWarning('Number of emitters (E) is not "1", got "6"')
     rootgrp = Dataset(path, 'a')
     rootgrp.renameDimension('E','OLD_E')
     rootgrp.createDimension('E',1)
@@ -212,4 +212,4 @@ def test_isValid():
     rootgrp.close()
 
     # Data type should be FIR
-    raiseWarning('DataType is not FIR')
+    raiseWarning('DataType is not "FIR", got: "FIRE"')

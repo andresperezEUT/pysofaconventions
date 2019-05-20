@@ -1598,8 +1598,7 @@ def test_checkListenerVariables():
     assert SOFAFile(path, 'r').checkListenerVariables()
     os.remove(path)
 
-
-    # Add ListenerUp, missing Units
+    # Add ListenerUp, Units and coordinates not mandatoru
     rootgrp = Dataset(path, 'w', format='NETCDF4')
     rootgrp.createDimension('I', 1)
     rootgrp.createDimension('C', 3)
@@ -1610,38 +1609,35 @@ def test_checkListenerVariables():
     rootgrp.createVariable('ListenerUp', 'f8', ('I', 'C'))
     rootgrp.close()
     # v0.1.4, ListenerUp views and units are not mandatory!
-    # raiseError('Missing Variable Attribute: ListenerUp.Units')
+    raiseError('ListenerUp exists but not ListenerView')
 
-    # # Missing ListenerUp.Coordinates
-    # rootgrp = Dataset(path, 'a')
-    # listenerUpVar = rootgrp.variables['ListenerUp']
-    # listenerUpVar.Units = 'metre'
-    # rootgrp.close()
-    # raiseError('Missing Variable Attribute: ListenerUp.Coordinates')
-
-    # Add ListenerView, missing Units
+    # Add ListenerView
+    # If "SingleRoomDRIR", units is not mandatory, but coordinates yes
     rootgrp = Dataset(path, 'a')
-    listenerUpVar = rootgrp.variables['ListenerUp']
-    listenerUpVar.Type = 'cartesian'
+    rootgrp.SOFAConventions = 'SingleRoomDRIR'
     rootgrp.createVariable('ListenerView', 'f8', ('I', 'C'))
-    rootgrp.close()
-    raiseError('Missing Variable Attribute: ListenerView.Units')
-
-    # Missing ListenerView.Coordinates
-    rootgrp = Dataset(path, 'a')
-    listenerViewVar = rootgrp.variables['ListenerView']
-    listenerViewVar.Units = 'metre'
     rootgrp.close()
     raiseError('Missing Variable Attribute: ListenerView.Coordinates')
 
-    # Add ListenerUp, now it's all fine
+    # Add ListenerView coordinates, not it's all right.
     rootgrp = Dataset(path, 'a')
     listenerViewVar = rootgrp.variables['ListenerView']
     listenerViewVar.Type = 'cartesian'
     rootgrp.close()
+
+    # If not "SingleRoomDRIR", units _is_ mandatory
+    rootgrp = Dataset(path, 'a')
+    rootgrp.SOFAConventions = 'SimpleFreeFieldHRIR'
+    rootgrp.close()
+    raiseError('Missing Variable Attribute: ListenerView.Units')
+
+    # All right
+    rootgrp = Dataset(path, 'a')
+    listenerViewVar = rootgrp.variables['ListenerView']
+    listenerViewVar.Units = 'metre'
+    rootgrp.close()
     assert SOFAFile(path, 'r').checkListenerVariables()
     os.remove(path)
-
 
 
 def test_checkSourceVariables():
@@ -1683,7 +1679,6 @@ def test_checkSourceVariables():
     assert SOFAFile(path, 'r').checkSourceVariables()
     os.remove(path)
 
-
     # Add SourceUp, missing Units
     rootgrp = Dataset(path, 'w', format='NETCDF4')
     rootgrp.createDimension('I', 1)
@@ -1694,38 +1689,35 @@ def test_checkSourceVariables():
     sourcePositionVar.Type = 'cartesian'
     rootgrp.createVariable('SourceUp', 'f8', ('I', 'C'))
     rootgrp.close()
-    raiseError('Missing Variable Attribute: SourceUp.Units')
+    raiseError('SourceUp exists but not SourceView')
 
-    # Missing SourceUp.Coordinates
+    # Add SourceView
+    # If "SingleRoomDRIR", units is not mandatory, but coordinates yes
     rootgrp = Dataset(path, 'a')
-    sourceUpVar = rootgrp.variables['SourceUp']
-    sourceUpVar.Units = 'metre'
-    rootgrp.close()
-    raiseError('Missing Variable Attribute: SourceUp.Coordinates')
-
-    # Add SourceView, missing Units
-    rootgrp = Dataset(path, 'a')
-    sourceUpVar = rootgrp.variables['SourceUp']
-    sourceUpVar.Type = 'cartesian'
+    rootgrp.SOFAConventions = 'SingleRoomDRIR'
     rootgrp.createVariable('SourceView', 'f8', ('I', 'C'))
-    rootgrp.close()
-    raiseError('Missing Variable Attribute: SourceView.Units')
-
-    # Missing SourceView.Coordinates
-    rootgrp = Dataset(path, 'a')
-    sourceViewVar = rootgrp.variables['SourceView']
-    sourceViewVar.Units = 'metre'
     rootgrp.close()
     raiseError('Missing Variable Attribute: SourceView.Coordinates')
 
-    # Add SourceUp, now it's all fine
+    # Add SourceView coordinates, not it's all right.
     rootgrp = Dataset(path, 'a')
     sourceViewVar = rootgrp.variables['SourceView']
     sourceViewVar.Type = 'cartesian'
     rootgrp.close()
+
+    # If not "SingleRoomDRIR", units _is_ mandatory
+    rootgrp = Dataset(path, 'a')
+    rootgrp.SOFAConventions = 'SimpleFreeFieldHRIR'
+    rootgrp.close()
+    raiseError('Missing Variable Attribute: SourceView.Units')
+
+    # All right
+    rootgrp = Dataset(path, 'a')
+    sourceViewVar = rootgrp.variables['SourceView']
+    sourceViewVar.Units = 'metre'
+    rootgrp.close()
     assert SOFAFile(path, 'r').checkSourceVariables()
     os.remove(path)
-
 
 
 def test_checkReceiverVariables():

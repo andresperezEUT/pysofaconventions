@@ -115,7 +115,7 @@ def test_isValid():
     ## Specific validity
 
     # SOFAConventions should be MultiSpeakerBRIR
-    raiseWarning('SOFAConventions is not MultiSpeakerBRIR')
+    raiseWarning('SOFAConventions is not "MultiSpeakerBRIR", got: "GeneralFIR"')
     rootgrp = Dataset(path, 'a')
     rootgrp.SOFAConventions = 'MultiSpeakerBRIR'
     rootgrp.close()
@@ -175,8 +175,8 @@ def test_isValid():
     emitterPositionVar.Type = 'cartesian'
     rootgrp.close()
 
-    # Data type should be FIR
-    raiseWarning('DataType is not FIR')
+    # Data type should be FIRE
+    raiseWarning('DataType is not "FIRE", got: "FIR"')
 
 
 

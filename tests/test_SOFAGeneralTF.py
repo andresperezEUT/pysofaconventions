@@ -115,7 +115,7 @@ def test_isValid():
     ## Specific validity
 
     # Data type should be FIR
-    raiseWarning('DataType is not TF')
+    raiseWarning('DataType is not "TF", got: "FIRE"')
     # Adjust data type and required variables to change
     rootgrp = Dataset(path, 'a')
     rootgrp.DataType = 'TF'
@@ -127,7 +127,7 @@ def test_isValid():
     rootgrp.close()
 
     # SOFAConventions should be GeneralTF
-    raiseWarning('SOFAConventions is not GeneralTF')
+    raiseWarning('SOFAConventions is not "GeneralTF", got: "GeneralFIRE"')
     rootgrp = Dataset(path, 'a')
     rootgrp.SOFAConventions = 'GeneralTF'
     rootgrp.close()
