@@ -67,7 +67,8 @@ class SOFAAmbisonicsDRIR(SOFAFile):
 
         # # Attributes
         if not self.isFIREDataType():
-            warnings.warn('DataType is not FIRE', SOFAWarning)
+            warnings.warn('DataType is not "FIRE", got: "{}"'.format(
+                self.getGlobalAttributeValue('DataType')), SOFAWarning)
             return False
 
         if not self.getGlobalAttributeValue('SOFAConventions') == 'AmbisonicsDRIR':

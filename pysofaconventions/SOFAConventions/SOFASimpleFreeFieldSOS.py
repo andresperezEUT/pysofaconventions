@@ -67,7 +67,8 @@ class SOFASimpleFreeFieldSOS(SOFAFile):
 
         # # Attributes
         if not self.isSOSDataType():
-            warnings.warn('DataType is not SOS', SOFAWarning)
+            warnings.warn('DataType is not "SOS", got: "{}"'.format(
+                self.getGlobalAttributeValue('DataType')), SOFAWarning)
             return False
 
         if not self.getGlobalAttributeValue('SOFAConventions') == 'SimpleFreeFieldSOS':
@@ -91,7 +92,7 @@ class SOFASimpleFreeFieldSOS(SOFAFile):
             return False
 
         if not (self.getDimensionSize('N') % 6 == 0):
-            warnings.warn('Number of emitters (N) is not multiple of 6, got "{}"'.format(self.getDimensionSize('N')),
+            warnings.warn('Number of coefficients (N) is not multiple of "6", got "{}"'.format(self.getDimensionSize('N')),
                           SOFAWarning)
             return False
 

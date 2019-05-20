@@ -73,7 +73,8 @@ class SOFASimpleHeadphoneIR(SOFAFile):
 
         # # Attributes
         if not self.isFIRDataType():
-            warnings.warn('DataType is not FIR', SOFAWarning)
+            warnings.warn('DataType is not "FIR", got: "{}"'.format(
+                self.getGlobalAttributeValue('DataType')), SOFAWarning)
             return False
 
         if not self.getGlobalAttributeValue('SOFAConventions') == 'SimpleHeadphoneIR':

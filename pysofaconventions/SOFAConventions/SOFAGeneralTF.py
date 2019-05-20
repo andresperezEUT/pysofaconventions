@@ -63,7 +63,8 @@ class SOFAGeneralTF(SOFAFile):
 
         # # Attributes
         if not self.isTFDataType():
-            warnings.warn('DataType is not TF', SOFAWarning)
+            warnings.warn('DataType is not "TF", got: "{}"'.format(
+                self.getGlobalAttributeValue('DataType')), SOFAWarning)
             return False
 
         if not self.getGlobalAttributeValue('SOFAConventions') == 'GeneralTF':
