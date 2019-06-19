@@ -160,6 +160,12 @@ class SOFAAttributes:
         :param attributeName:   he attribute name
         :return:                the default attribute value, or empty string if not found
         """
+        if not cls.davInitialized:
+            from .SOFAConventions import SOFASimpleFreeFieldHRIR
+            cls.defaultAttributeValues[
+                cls.AttributeTypes.SOFAConventionsVersion
+                ] = SOFASimpleFreeFieldHRIR.getConventionVersion()
+
         attr = cls.attributeTypesDict[attributeName]
         if cls.hasDefaultValueAttributes[attr]:
             return cls.defaultAttributeValues[attr]
@@ -269,6 +275,7 @@ class SOFAAttributes:
         AttributeTypes.EmitterDescription:      False,
     }
 
+    davInitialized = False
     defaultAttributeValues = {
         AttributeTypes.Conventions: 'SOFA',
         AttributeTypes.Version: SOFAAPI.getSpecificationsVersion(),
