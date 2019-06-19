@@ -165,6 +165,7 @@ class SOFAAttributes:
             cls.defaultAttributeValues[
                 cls.AttributeTypes.SOFAConventionsVersion
                 ] = SOFASimpleFreeFieldHRIR.getConventionVersion()
+            cls.davInitialized = True
 
         attr = cls.attributeTypesDict[attributeName]
         if cls.hasDefaultValueAttributes[attr]:
