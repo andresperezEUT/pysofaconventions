@@ -281,7 +281,8 @@ class SOFAAttributes:
         AttributeTypes.Version: SOFAAPI.getSpecificationsVersion(),
         AttributeTypes.DataType: 'FIR',
         AttributeTypes.SOFAConventions: 'SimpleFreeFieldHRIR',
-        # TODO: importing SimpleFreeFieldHRIR causes multiple circular dependency errors to happen
+        # Importing SimpleFreeFieldHRIR causes multiple circular dependency errors to happen
+        # Import and assignment moved inside "getDefaultAttributeValue"
         # AttributeTypes.SOFAConventionsVersion: 'SimpleFreeFieldHRIR::GetConventionVersion()',
         AttributeTypes.SOFAConventionsVersion: '',
         AttributeTypes.APIName: SOFAAPI.getAPIName(),
