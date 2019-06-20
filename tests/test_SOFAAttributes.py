@@ -162,7 +162,7 @@ def test_getDefaultAttributeValue():
     assert SOFAAttributes.getDefaultAttributeValue('SOFAConventions')           \
            == 'SimpleFreeFieldHRIR'
     assert SOFAAttributes.getDefaultAttributeValue('SOFAConventionsVersion')    \
-           == ''
+           == SOFASimpleFreeFieldHRIR.getConventionVersion()
     assert SOFAAttributes.getDefaultAttributeValue('APIName')                   \
            == SOFAAPI.getAPIName()
     assert SOFAAttributes.getDefaultAttributeValue('APIVersion')                \
