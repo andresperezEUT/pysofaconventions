@@ -21,9 +21,9 @@ def printBlankLine():
 
 
 # Set here your SOFA file path
-# path = "/Volumes/Dinge/SOFA/HRIR_measured_pp73_pos_0_0.sofa"
-path = "/Volumes/Dinge/SOFA/miro/sala1.sofa"
-
+# http://sofacoustics.org/data/database/cipic/subject_003.sofa
+path = '/Volumes/Dinge/SOFA/subject_003.sofa'
+path = "/Volumes/Dinge/SOFA/testpysofaconventions.sofa"
 # Open the file for reading
 file = SOFAFile(path,"r")
 
@@ -32,7 +32,7 @@ if file.isValid():
     print(path + " is a valid SOFA file")
 else:
     print(path + " is _NOT_ a valid SOFA file")
-    exit()
+    # exit()
 
 
 # Print attributes
@@ -79,13 +79,13 @@ elif convention == 'SingleRoomDRIR':
     conventionFile = SOFASingleRoomDRIR(path,"r")
 else:
     print(convention + " is _NOT_ a valid SOFA convention type")
-    exit()
+    # exit()
 
 if conventionFile.isValid():
     print(path + " is a valid " + convention + " SOFA file")
 else:
     print(path + " is _NOT_ a valid " + convention + " SOFA file")
-    exit()
+    # exit()
 
 # Print Variable dimensions
 printLine()
@@ -200,10 +200,3 @@ if conventionFile.hasEmitterUp():
     print("- EmitterUp:Units = " + emitterUpUnits)
     print("- EmitterUp = " + str(emitterUp))
     printBlankLine()
-
-
-# Ambisonics stuff
-if convention == 'AmbisonicsDRIR':
-    print("- GLOBAL:AmbisonicsOrder = " + conventionFile.getGlobalAttributeValue('AmbisonicsOrder'))
-    print("- Data.IR:ChannelOrdering = " + conventionFile.getDataIRChannelOrdering())
-    print("- Data.IR:Normalization = " + conventionFile.getDataIRNormalization())

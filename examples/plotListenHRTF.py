@@ -24,40 +24,40 @@ path = '/Volumes/Dinge/SOFA/subject_003.sofa'
 sofa = SOFAFile(path,'r')
 
 # File is actually not valid, but we can forgive them
-print "\n"
-print "File is valid:", sofa.isValid()
+print("\n")
+print("File is valid:", sofa.isValid())
 
 # Convention is SimpleFreeFieldHRIR
-print "\n"
-print "SOFA Convention:", sofa.getGlobalAttributeValue('SOFAConventions')
+print("\n")
+print("SOFA Convention:", sofa.getGlobalAttributeValue('SOFAConventions'))
 
 # Let's see the dimensions:
 #   - M: 1250 (different measurement positions)
 #   - R: 2 (the two ears)
 #   - E: 1 (one loudspeaker)
 #   - N: 200 (lenght of the HRTFs in samples)
-print "\n"
-print "Dimensions:"
+print("\n")
+print("Dimensions:")
 sofa.printSOFADimensions()
 
 # Let's see the variables as well
-print "\n"
-print "Variables"
+print("\n")
+print("Variables")
 sofa.printSOFAVariables()
 
 # Let's check the position of the measurementa (Source position)
 sourcePositions = sofa.getVariableValue('SourcePosition')
-print "\n"
-print "Source Positions"
-print sourcePositions
+print("\n")
+print("Source Positions")
+print(sourcePositions)
 # and the info (units, coordinates)
-print sofa.getPositionVariableInfo('SourcePosition')
+print(sofa.getPositionVariableInfo('SourcePosition'))
 
 # Let's inspect the first measurement
 m = 0
-print "\n"
-print "Source Position of measurement " + str(m)
-print sourcePositions[m]
+print("\n")
+print("Source Position of measurement " + str(m))
+print(sourcePositions[m])
 # which is at 82 degrees azimuth, -7 degrees elevation
 
 # Read the data
@@ -66,9 +66,9 @@ data = sofa.getDataIR()
 hrtf = data[m,:,:]
 
 # Let's check the dimensions of the hrtf
-print "\n"
-print "HRTF dimensions"
-print hrtf.shape
+print("\n")
+print("HRTF dimensions")
+print(hrtf.shape)
 
 # It looks fine, so let's plot it
 plt.plot(hrtf[0], label="left", linewidth=0.5,  marker='o', markersize=1)

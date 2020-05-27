@@ -11,14 +11,17 @@
 #
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
-from pysofaconventions import *
 from netCDF4 import Dataset
 import time
 import numpy as np
+import os
 
 #----------Create it----------#
 
 filePath = "/Volumes/Dinge/SOFA/testpysofaconventions.sofa"
+# Need to delete it first if file already exists
+if os.path.exists(filePath):
+    os.remove(filePath)
 rootgrp = Dataset(filePath, 'w', format='NETCDF4')
 
 
@@ -26,7 +29,7 @@ rootgrp = Dataset(filePath, 'w', format='NETCDF4')
 
 rootgrp.Conventions = 'SOFA'
 rootgrp.Version = '1.0'
-rootgrp.SOFAConventions = 'AmbisonicsDRIR'
+rootgrp.SOFAConventions = 'SimpleFreeFieldHRIR'
 rootgrp.SOFAConventionsVersion = '0.1'
 rootgrp.APIName = 'pysofaconventions'
 rootgrp.APIVersion = '0.1'
@@ -34,26 +37,29 @@ rootgrp.APIVersion = '0.1'
 rootgrp.AuthorContact = 'andres.perez@eurecat.org'
 rootgrp.Organization = 'Eurecat - UPF'
 rootgrp.License = 'WTFPL - Do What the Fuck You Want to Public License'
-rootgrp.DataType = 'FIRE'
+rootgrp.DataType = 'FIR'
 rootgrp.RoomType = 'reverberant'
 rootgrp.DateCreated = time.ctime(time.time())
 rootgrp.DateModified = time.ctime(time.time())
 rootgrp.Title = 'testpysofaconventions'
-rootgrp.AmbisonicsOrder = '1'
+rootgrp.RoomType = 'free field'
+rootgrp.DatabaseName = 'CoolDatabase'
+rootgrp.ListenerShortName = '001'
+
 
 
 #----------Required Dimensions----------#
 
 m = 3
 n = 48000
-r = 4
-e = 8
+r = 2
+e = 1
 i = 1
 c = 3
 rootgrp.createDimension('M', m)
 rootgrp.createDimension('N', n)
-rootgrp.createDimension('R', r)
 rootgrp.createDimension('E', e)
+rootgrp.createDimension('R', r)
 rootgrp.createDimension('I', i)
 rootgrp.createDimension('C', c)
 
@@ -79,22 +85,12 @@ emitterPositionVar  = rootgrp.createVariable('EmitterPosition',     'f8',   ('E'
 emitterPositionVar.Units   = 'metre'
 emitterPositionVar.Type    = 'spherical'
 # Equidistributed speakers in circle
-emitterPositionVar[:] = np.ndarray((e,c,i))
-for idx in range(e):
-    azi = idx*360/float(e)
-    ele = 0.
-    dis = 1.
-    emitterPositionVar[idx,:,:] = np.asarray([azi,ele,dis])
-
-emitterUpVar        = rootgrp.createVariable('EmitterUp',           'f8',   ('E','C','I'))
-emitterUpVar.Units         = 'metre'
-emitterUpVar.Type          = 'cartesian'
-emitterUpVar[:]     = np.zeros((e,c,i))
-
-emitterViewVar      = rootgrp.createVariable('EmitterView',         'f8',   ('E','C','I'))
-emitterViewVar.Units       = 'metre'
-emitterViewVar.Type        = 'cartesian'
-emitterViewVar[:]   = np.zeros((e,c,i))
+emitterPositionVar[:] = np.zeros((e,c,i))
+# for idx in range(e):
+#     azi = idx*360/float(e)
+#     ele = 0.
+#     dis = 1.
+#     emitterPositionVar[idx,:,:] = np.asarray([azi,ele,dis])
 
 sourcePositionVar = rootgrp.createVariable('SourcePosition',        'f8',   ('I','C'))
 sourcePositionVar.Units   = 'metre'
@@ -114,20 +110,20 @@ sourceViewVar[:]  = np.asarray([1,0,0])
 receiverPositionVar = rootgrp.createVariable('ReceiverPosition',  'f8',   ('R','C','I'))
 receiverPositionVar.Units   = 'metre'
 receiverPositionVar.Type    = 'cartesian'
-receiverPositionVar[:]      = np.zeros((r,c))
+receiverPositionVar[:]      = np.zeros((r,c,i))
 
 samplingRateVar =   rootgrp.createVariable('Data.SamplingRate', 'f8',   ('I'))
 samplingRateVar.Units = 'hertz'
 samplingRateVar[:] = 48000
 
-delayVar        =   rootgrp.createVariable('Data.Delay',        'f8',   ('I','R','E'))
-delay = np.zeros((i,r,e))
-delayVar[:,:,:] = delay
+delayVar        =   rootgrp.createVariable('Data.Delay',        'f8',   ('I','R'))
+delay = np.zeros((i,r))
+delayVar[:,:] = delay
 
-dataIRVar =         rootgrp.createVariable('Data.IR', 'f8', ('M','R','E','N'))
+dataIRVar =         rootgrp.createVariable('Data.IR', 'f8', ('M','R','N'))
 dataIRVar.ChannelOrdering   = 'acn'
 dataIRVar.Normalization     = 'sn3d'
-dataIRVar[:] = np.random.rand(m,r,e,n)
+dataIRVar[:] = np.random.rand(m,r,n)
 
 #----------Close it----------#
 
