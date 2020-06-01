@@ -17,7 +17,7 @@ before_install:
     - pip install netCDF4
 
 install:
-    - pip install -e .[tests]
+    - pip install .
 
 script:
      - py.test
