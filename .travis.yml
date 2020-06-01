@@ -1,20 +1,10 @@
 language: python
 
-notifications:
-    email: false
-
 python:
     - "3.7"
 
-
-before_install:
-    - deps='pip'
-    - pip install python-coveralls
-    - pip install pytest-faulthandler
-    - pip install pytest
-    - pip install pytest-cov
-    - pip install numpydoc
-    - pip install netCDF4
+install:
+  - pip install -r requirements.txt
 
 script:
      - py.test
