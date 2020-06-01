@@ -16,9 +16,6 @@ before_install:
     - pip install numpydoc
     - pip install netCDF4
 
-install:
-    - pip install .
-
 script:
      - py.test
 
