@@ -4,10 +4,21 @@ notifications:
     email: false
 
 python:
+    - "2.7"
+    - "3.5"
     - "3.6"
 
+
+before_install:
+    - deps='pip'
+    - pip install python-coveralls
+    - pip install pytest-faulthandler
+    - pip install pytest-cov
+    - pip install numpydoc
+    - pip install netCDF4
+
 install:
-    - pip install -r requirements.txt
+    - pip install -e .[tests]
 
 script:
      - py.test
