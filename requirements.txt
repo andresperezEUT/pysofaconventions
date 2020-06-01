@@ -1,5 +1,0 @@
-python-coveralls
-pytest-faulthandler
-pytest-cov
-numpydoc
-netCDF4
